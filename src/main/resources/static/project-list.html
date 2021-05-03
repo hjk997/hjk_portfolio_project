@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Freelancer - Start Bootstrap Theme</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav>
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger text-white" href="index.html"><h4>Portfolio</h4></a>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-black rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger " href="info.html">소개</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger active" href="tech-stack.html">기술 스택</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#page-top">프로젝트</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="update-list.html">업데이트</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="contact.html">연락처</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Masthead-->
+  <header class="masthead text-black text-center">
+    <div class="container d-flex align-items-center flex-column">
+      <tmpstyle style="background-color:white; opacity:0.3; z-index:-1;">
+        <img src="assets/img/main_image.jpg" title="메인 이미지" alt="메인 이미지" style="position:absolute; top:0; left:0; width: 100%; height: 80%; z-index:-1"/>
+      </tmpstyle>
+      <!-- Masthead Heading-->
+      <h1 class="masthead-heading text-uppercase mb-0">프로젝트</h1>
+      <!-- Icon Divider-->
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+      </div>
+      <!-- Masthead Subheading-->
+      <p class="masthead-subheading font-weight-light mb-0">이제까지 진행한 프로젝트 목록입니다.</p>
+    </div>
+  </header>
+  <!-- Portfolio Section-->
+  <section class="page-section portfolio bg-primary" id="portfolio">
+    <div class="container">
+      <div class="container">
+        <div>
+          <!-- title Heading-->
+          <h2 class="page-section-heading text-uppercase text-secondary mb-0">프로젝트 목록</h2>
+          <hr />
+        </div>
+        <div class="row justify-content-md-center my-5">
+          <!-- 검색창 -->
+          <form action="" method="GET">
+            <div class="form-row align-items-center">
+              <div class="col-auto my-1">
+                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                  <option selected>선택</option>
+                  <option value="1">제목</option>
+                  <option value="2">제목+설명</option>
+                  <option value="3">태그</option>
+                </select>
+              </div>
+              <div class="col-auto my-1">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                  <input type="text" class="form-control" id="customControlAutosizing">
+                </div>
+              </div>
+              <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary">검색</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 게시판 --!>
+      <div name="project-list"  class="container">
+        <div class="pb-3">
+          <div name="list1" class="row" >
+            <div class="col-4 imageContainer" >
+              <img src="assets/img/no-image.png" alt="image" />
+            </div>
+            <div class="col-8" >
+              <div class="ext-row">
+                <div class="pt-3" style="display: flex;
+                flex-direction: row; justify-content: space-between; ">
+                <span>
+                  <h4 style="display:inline;">프로젝트명</h4>
+                  <img src="assets/img/project/second.png" alt="2 grade" style="width:2.5em;"/>
+                  <img src="assets/img/project/team.png" alt="team project" style="width:2.5em;"/>
+                </span>
+                <span>
+                  <!-- drop down -->
+                  <div class="dropdown">
+                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">수정</a>
+                      <a class="dropdown-item" href="#">삭제</a>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div>
+                내용설명
+              </div>
+            </div>
+          </div>
+          <div class="pb-3">
+            <button type="button" class="btn btn-outline-info">#java</button>
+            <button type="button" class="btn btn-outline-info">#mysql</button>
+          </div>
+        </div>
+        <div class="pb-3">
+          <div name="list1" class="row" >
+            <div class="col-4 imageContainer" >
+              <img src="assets/img/no-image.png" alt="image" />
+            </div>
+            <div class="col-8" >
+              <div class="ext-row">
+                <div class="pt-3" style="display: flex;
+                flex-direction: row; justify-content: space-between; ">
+                <span>
+                  <h4 style="display:inline;">프로젝트명</h4>
+                  <img src="assets/img/project/second.png" alt="2 grade" style="width:2.5em;"/>
+                  <img src="assets/img/project/team.png" alt="team project" style="width:2.5em;"/>
+                </span>
+                <span>
+                  <!-- drop down -->
+                  <div class="dropdown">
+                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">수정</a>
+                      <a class="dropdown-item" href="#">삭제</a>
+                    </div>
+                  </div>
+
+                </span>
+              </div>
+              <div>
+                내용설명
+              </div>
+            </div>
+          </div>
+          <div class="pb-3">
+            <button type="button" class="btn btn-outline-info">#java</button>
+            <button type="button" class="btn btn-outline-info">#mysql</button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <button type="button" class="btn btn-dark" onclick="location.href='write-project.html'">글쓰기</button>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+    </section>
+
+    <!-- Footer-->
+    <footer class="footer">
+      <div class="container" >
+        <div class="text-uppercase mb-4" >
+          <h4 class = "row">hjk portfolio</h4>
+          <hr />
+        </div>
+      </div>
+      <div class="container" >
+        <div class="row" style="justify-content: space-between; ">
+          <!-- Footer Info-->
+          <div>
+            <h4 class="text-uppercase mb-4">Info</h4>
+            <p class="lead">
+              developer : heejung kim
+              <br />
+              developer period : 2020.10~
+              <br />
+              copyright hjk
+              <br />
+              <a href="login.html">관리자 로그인</a>
+            </p>
+          </div>
+          <!-- Footer Social Icons-->
+          <div>
+            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fas fa-fw fa-blog"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-google"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Copyright Section-->
+    <div class="copyright py-4 text-center text-white">
+      <div class="container"><small>Copyright © Your Website 2020</small></div>
+    </div>
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+    <div class="scroll-to-top d-lg-none position-fixed">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+    </div>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Contact form JS-->
+    <script src="assets/mail/jqBootstrapValidation.js"></script>
+    <script src="assets/mail/contact_me.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+  </body>
+  </html>
