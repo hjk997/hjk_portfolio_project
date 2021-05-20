@@ -4,27 +4,28 @@ plugins {
 	id 'java'
 }
 
-group = 'com.portfolio'
+group = 'com.hjkportfolio'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.11.RELEASE'
-	implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.5'
-	implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.3'
-	implementation group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.6'
-	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-
-	annotationProcessor("org.projectlombok:lombok:1.18.12")
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

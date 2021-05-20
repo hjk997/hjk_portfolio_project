@@ -1,4 +1,4 @@
-package com.post;
+package com.hjkportfolio.hjk.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,5 +15,4 @@ public class UpdateBean {
     Date writeDate;
     String contents;
     int writerUid;
-
 }

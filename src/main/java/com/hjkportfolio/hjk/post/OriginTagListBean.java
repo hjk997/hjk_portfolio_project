@@ -1,4 +1,4 @@
-package com.post;
+package com.hjkportfolio.hjk.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,10 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProjectTagListBean {
+public class OriginTagListBean {
     int uid;
-    int projectUid;
-    int tagUid;
-
-
+    String tagName;
 }

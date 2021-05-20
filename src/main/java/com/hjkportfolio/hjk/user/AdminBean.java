@@ -1,4 +1,4 @@
-package com.post;
+package com.hjkportfolio.hjk.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class OriginTagListBean {
+public class AdminBean {
+
     int uid;
-    String tagName;
+    String admin_id;
+    String password;
+    String name;
+
 }
