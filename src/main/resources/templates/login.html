@@ -39,15 +39,16 @@
       <!-- Portfolio Section Content-->
       <div class="row justify-content-center text-black">
         <div class="col-lg-4 ml"><p class="lead">
-          <form method="POST">
+          <form method="POST" action="/login/access">
             <div class="form-group">
               <span class="mb-5 row justify-content-center">현재 관리자만 이용할 수 있는 기능입니다.</span>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="id">
+              <input type="text" class="form-control" id="id" name="admin_id" placeholder="id">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="password">
-
+              <input type="password" class="form-control" id="password" name="password" placeholder="password">
             </div>
+          <input type="hidden" value="0" name="uid">
+          <input type="hidden" value="someone" name="name">
 
             <div class="form-group row justify-content-center my-2">
               <button type="submit" class="btn btn-secondary btn-block">확인</button>
@@ -59,5 +60,36 @@
   </section>
 <!-- Footer-->
 <div th:replace="/footer"></div>
+<input type="hidden" id="login_message" th:value="${message}"></input>
+
+<!-- Modal -->
+<div class="modal fade" id="failedLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">로그인 실패</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <h5 class="page-section-heading text-center text-uppercase text-secondary mb-3">아이디나 비밀번호가 올바르지 않습니다.</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
+
+<script>
+  var x = document.getElementById("login_message").value;
+  console.log(x)
+  if(x){
+    $(document).ready(function(){
+        $("#failedLoginModal").modal();
+    });
+  }
+</script>
 </html>

@@ -1,5 +1,6 @@
 package com.hjkportfolio.hjk.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +11,8 @@ import lombok.Setter;
 public class AdminBean {
 
     int uid;
-    String admin_id;
-    String password;
-    String name;
+    private String admin_id;
+    private String password;
+    private String name;
 
 }
