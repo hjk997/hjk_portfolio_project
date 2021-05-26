@@ -6,11 +6,11 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -25,8 +25,15 @@ public class LoginController {
 
     @GetMapping("login")
     public String login(){
-
         return "login";
+    }
+
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+
+        session.invalidate();
+
+        return "redirect:/";
     }
 
     @GetMapping("test")
@@ -92,7 +99,7 @@ public class LoginController {
     }
 
     @PostMapping("login/access")
-    public String loginAccess(AdminBean adminBean, RedirectAttributes rttr){
+    public String loginAccess(AdminBean adminBean, HttpSession session, RedirectAttributes rttr){
 
         String id = adminBean.getAdmin_id();
         String pw = adminBean.getPassword();
@@ -100,10 +107,17 @@ public class LoginController {
         // 1. 데이터를 받아온다.
         System.out.println(id + " " + pw);
 
+        AdminBean adminBeanInDatabase = getAdminBeanInDatabase(id);
+
         // 2. 받아온 데이터가 데이터베이스에 있는 값과 일치하는지 확인한다.
-        if(isLogin(id, pw)){
+        if(adminBeanInDatabase != null && isLogin(adminBeanInDatabase, adminBean)){
             // 3. 일치한다면 로그인 성공 후 메인 화면으로 돌아간다.
             System.out.println("success");
+
+            session.setAttribute("uid", adminBeanInDatabase.getUid());
+            session.setAttribute("id", adminBeanInDatabase.getAdmin_id());
+            session.setAttribute("name", adminBeanInDatabase.getName());
+
             return "redirect:/";
         }else{
             // 4. 불일치한다면 팝업을 띄운 뒤 로그인 화면으로 돌아간다.
@@ -116,15 +130,7 @@ public class LoginController {
 
     }
 
-    /**
-     *
-     * 데이터베이스에 저장된 id와 pw를 입력받은 값과 비교한다.
-     *
-     * @param id
-     * @param pw
-     * @return is success login
-     */
-    private boolean isLogin(String id, String pw) {
+    private AdminBean getAdminBeanInDatabase(String id){
         String resource = "mybatis-config.xml";
         InputStream inputStream;
 
@@ -134,17 +140,21 @@ public class LoginController {
 
             try (SqlSession session = sqlSessionFactory.openSession()) {
                 AdminBean user = session.selectOne("mapper.AdminLogin.selectUser", id);
-
-                if (user != null && pw.equals(user.getPassword())) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return user;
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
+    }
+
+
+    private boolean isLogin(AdminBean adminBean1, AdminBean adminBean2) {
+        if(adminBean1.getPassword().equals(adminBean2.getPassword())){
+            return true;
+        }
+
+        return false;
     }
 
 }
