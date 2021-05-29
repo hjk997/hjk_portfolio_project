@@ -143,7 +143,7 @@ public class LoginController {
      * @param id - 사용자가 입력한 id
      * @return 데이터베이스 조회 후 나온 id
      */
-    public Optional<AdminBean> getAdminBeanInDatabase(String id){
+    private Optional<AdminBean> getAdminBeanInDatabase(String id){
         String resource = "mybatis-config.xml";
         InputStream inputStream;
 
@@ -159,26 +159,6 @@ public class LoginController {
         } catch (IOException e) {
             e.printStackTrace();
             return Optional.ofNullable(null);
-        }
-    }
-
-    public void insertAdminAccount(AdminBean testUser){
-        String resource = "mybatis-config.xml";
-        InputStream inputStream;
-
-        try {
-            inputStream = Resources.getResourceAsStream(resource);
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-            try (SqlSession session = sqlSessionFactory.openSession()) {
-                session.insert("mapper.AdminLogin.insertTestAdminUser",
-                        testUser);
-                session.commit();
-                session.close();
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

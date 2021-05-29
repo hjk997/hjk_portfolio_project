@@ -39,7 +39,7 @@
       <!-- Portfolio Section Content-->
       <div class="row justify-content-center text-black">
         <div class="col-lg-4 ml"><p class="lead">
-          <form method="POST" action="/login/access">
+          <form id="login_form" method="POST" action="/login/access">
             <div class="form-group">
               <span class="mb-5 row justify-content-center">현재 관리자만 이용할 수 있는 기능입니다.</span>
               <input type="text" class="form-control" id="id" name="admin_id" placeholder="id">
@@ -51,7 +51,7 @@
           <input type="hidden" value="someone" name="name">
 
             <div class="form-group row justify-content-center my-2">
-              <button type="submit" class="btn btn-secondary btn-block">확인</button>
+              <button type="button" class="btn btn-secondary btn-block" onclick="check_input()">확인</button>
             </div>
           </form>
         </div>
@@ -74,7 +74,7 @@
       </div>
       <div class="modal-body">
         <div class="container">
-          <h5 class="page-section-heading text-center text-uppercase text-secondary mb-3">아이디나 비밀번호가 올바르지 않습니다.</h5>
+          <h5 id="modal_error_text" class="page-section-heading text-center text-uppercase text-secondary mb-3"></h5>
         </div>
       </div>
     </div>
