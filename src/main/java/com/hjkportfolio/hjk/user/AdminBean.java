@@ -15,4 +15,13 @@ public class AdminBean {
     private String password;
     private String name;
 
+    @Override
+    public String toString() {
+        return "AdminBean{" +
+                "uid=" + uid +
+                ", admin_id='" + admin_id + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
