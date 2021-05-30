@@ -5,6 +5,6 @@
 <mapper namespace="mapper.AdminLogin">
     <insert id="insertTestAdminUser">
         insert into admin (admin_id,password,name)
-        values (#{admin_id},#{password},#{name});
+        values (#{admin_id},hex(AES_ENCRYPT(#{password},SHA2('key', 256))),#{name});
     </insert>
 </mapper>

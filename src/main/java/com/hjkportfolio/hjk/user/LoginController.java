@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -111,28 +112,27 @@ public class LoginController {
     @PostMapping("login/access")
     public String loginAccess(AdminBean adminBean, HttpSession session, RedirectAttributes rttr){
         // 1. 데이터를 받아온다.
-        Optional<AdminBean> optional = getAdminBeanInDatabase(adminBean.getAdmin_id());
+        Optional<AdminBean> optional = getAdminBeanInDatabase(adminBean);
 
         AdminBean adminBeanInDatabase;
 
+        // 2. 받아온 데이터가 데이터베이스에 있는 값과 일치하는지 확인한다.
         if(optional.isPresent()){
             adminBeanInDatabase = optional.get();
 
-            // 2. 받아온 데이터가 데이터베이스에 있는 값과 일치하는지 확인한다.
-            if(isLogin(adminBeanInDatabase, adminBean)){
-                // 3. 일치한다면 로그인 성공 후 메인 화면으로 돌아간다.
-                session.setAttribute("uid", adminBeanInDatabase.getUid());
-                session.setAttribute("id", adminBeanInDatabase.getAdmin_id());
-                session.setAttribute("name", adminBeanInDatabase.getName());
+            // 3. 일치한다면 로그인 성공 후 메인 화면으로 돌아간다.
+            session.setAttribute("uid", adminBeanInDatabase.getUid());
+            session.setAttribute("id", adminBeanInDatabase.getAdmin_id());
+            session.setAttribute("name", adminBeanInDatabase.getName());
 
-                return "redirect:/";
-            }
+            return "redirect:/";
+
+        }else{
+            // 4. 불일치한다면 팝업을 띄운 뒤 로그인 화면으로 돌아간다.
+            rttr.addFlashAttribute("message", "아이디나 비밀번호의 값이 올바르지 않습니다.");
+
+            return "redirect:/login";
         }
-
-        // 4. 불일치한다면 팝업을 띄운 뒤 로그인 화면으로 돌아간다.
-        rttr.addFlashAttribute("message", "아이디나 비밀번호의 값이 올바르지 않습니다.");
-
-        return "redirect:/login";
 
     }
 
@@ -140,10 +140,10 @@ public class LoginController {
      *
      * 사용자가 입력한 id가 데이터베이스에 있는지 조회한다.
      *
-     * @param id - 사용자가 입력한 id
+     * @param adminBean - 사용자가 입력한 id
      * @return 데이터베이스 조회 후 나온 id
      */
-    private Optional<AdminBean> getAdminBeanInDatabase(String id){
+    private Optional<AdminBean> getAdminBeanInDatabase(AdminBean adminBean){
         String resource = "mybatis-config.xml";
         InputStream inputStream;
 
@@ -152,28 +152,15 @@ public class LoginController {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
             try (SqlSession session = sqlSessionFactory.openSession()) {
-                AdminBean user = session.selectOne("mapper.AdminLogin.selectUser", id);
+                AdminBean optional = session.selectOne("mapper.AdminLogin.selectUser", adminBean);
+
                 session.close();
-                return Optional.ofNullable(user);
+                return Optional.ofNullable(optional);
             }
         } catch (IOException e) {
             e.printStackTrace();
             return Optional.ofNullable(null);
         }
-    }
-
-    /**
-     * 사용자가 입력한 로그인 정보와 데이터베이스에 있는 로그인 정보가 같은지 확인한다.
-     * @param adminBean1 데이터베이스에서 가져온 로그인 정보
-     * @param adminBean2 사용자가 입력한 로그인 정보
-     * @return 로그인 가능 여부
-     */
-    private boolean isLogin(AdminBean adminBean1, AdminBean adminBean2) {
-        if(adminBean1.getPassword().equals(adminBean2.getPassword())){
-            return true;
-        }
-
-        return false;
     }
 
 }
