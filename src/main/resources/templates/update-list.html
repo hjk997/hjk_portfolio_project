@@ -52,7 +52,7 @@
                         <tbody>
                           <tr>
                             <td>1</td>
-                            <td>제목</td>
+                              <td><a href="update">제목</a></td>
                             <td>hjk</td>
                             <td>2020-01-01</td>
                           </tr>
@@ -98,5 +98,5 @@
     </body>
 
 <script th:inline="javascript" th:src="@{/js/update-list.js}"></script>
-<script src="/js/common.js"></script>
+<th:block th:replace="/jscript"></th:block>
 </html>

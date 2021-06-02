@@ -100,6 +100,11 @@ public class LoginController {
         return "write-update";
     }
 
+    @GetMapping("update")
+    public String Update(){
+        return "update";
+    }
+
     /**
      *
      * 사용자 로그인 수행 메소드
