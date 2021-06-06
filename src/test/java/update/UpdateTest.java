@@ -34,8 +34,6 @@ public class UpdateTest {
     }
 
     @Test
-    @Transactional
-    @Rollback(true)
     public void 업데이트_글_작성하기(){
         UpdateController updateController = new UpdateController();
         String title = "title";

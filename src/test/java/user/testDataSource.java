@@ -1,4 +1,4 @@
-package mybatis;
+package user;
 
 import com.hjkportfolio.hjk.user.AdminBean;
 import org.apache.ibatis.io.Resources;
