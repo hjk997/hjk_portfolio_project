@@ -20,6 +20,6 @@ public class mybatisJavaConfigurationTest {
         AdminBean adminBean = new AdminBean(1, "hjk997", "345612", "hjk");
         AdminBean resultAdminBean = loginService.getAdminBean(adminBean);
 
-        Assertions.assertThat(adminBean).isSameAs(resultAdminBean);
+        Assertions.assertThat(adminBean.getAdmin_id()).isEqualTo(resultAdminBean.getAdmin_id());
     }
 }

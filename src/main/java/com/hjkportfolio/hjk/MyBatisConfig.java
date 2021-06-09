@@ -26,7 +26,9 @@ public class MyBatisConfig {
 
     @Bean
     public SqlSessionTemplate sqlSession() throws Exception {
-        return new SqlSessionTemplate(sqlSessionFactory());
+        SqlSessionTemplate session = new SqlSessionTemplate(sqlSessionFactory());
+        session.getConfiguration().addMapper(AdminMapper.class);
+        return session;
     }
 
     @Bean
@@ -40,7 +42,7 @@ public class MyBatisConfig {
     public DataSource dataSource() throws Exception{
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/portfolio?characterEncoding=UTF-8 &amp;serverTimezone=UTC");
+        dataSourceBuilder.url("jdbc:mysql://localhost:3306/portfolio?characterEncoding=UTF-8&serverTimezone=UTC");
         dataSourceBuilder.username("root");
         dataSourceBuilder.password("3456");
         return dataSourceBuilder.build();

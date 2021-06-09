@@ -1,5 +1,6 @@
 package com.hjkportfolio.hjk.user;
 
+import com.hjkportfolio.hjk.mapper.AdminMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class LoginService {
 
     public AdminBean getAdminBean(AdminBean adminBean){
         //return new AdminBean(0, "name", "name","name");
-        return sqlSession.selectOne("com.hjkportfolio.hjk.mapper.AdminMapper.getAdminBean", adminBean);
+        AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
+        AdminBean adminBean1 = adminMapper.getAdminBean(adminBean);
+        return adminBean1;
     }
 }
