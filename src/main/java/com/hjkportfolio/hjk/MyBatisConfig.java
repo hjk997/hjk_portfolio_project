@@ -32,13 +32,6 @@ public class MyBatisConfig {
     }
 
     @Bean
-    public MapperFactoryBean<AdminMapper> adminMapper() throws Exception{
-        MapperFactoryBean<AdminMapper> factoryBean = new MapperFactoryBean<>(AdminMapper.class);
-        factoryBean.setSqlSessionFactory(sqlSessionFactory());
-        return factoryBean;
-    }
-
-    @Bean
     public DataSource dataSource() throws Exception{
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
@@ -46,11 +39,6 @@ public class MyBatisConfig {
         dataSourceBuilder.username("root");
         dataSourceBuilder.password("3456");
         return dataSourceBuilder.build();
-    }
-
-    @Bean
-    public DataSourceTransactionManager transactionManager() throws Exception {
-        return new DataSourceTransactionManager(dataSource());
     }
 
     @Bean

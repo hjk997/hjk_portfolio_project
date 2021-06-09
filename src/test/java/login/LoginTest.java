@@ -1,18 +1,14 @@
 package login;
 
+import com.hjkportfolio.hjk.MyBatisConfig;
 import com.hjkportfolio.hjk.user.AdminBean;
 import com.hjkportfolio.hjk.user.LoginController;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.hjkportfolio.hjk.user.LoginService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
@@ -22,9 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Rollback(true)
 public class LoginTest {
 
-    @Autowired
-    private SqlSession session;
-
     @Test
     @Rollback(true)
     @Transactional
@@ -33,7 +26,7 @@ public class LoginTest {
         LoginController loginController = new LoginController();
 
         // 2. tc insert
-        AdminBean testAdminBean = new AdminBean(0, "1997","345612","hjk");
+        AdminBean testAdminBean = new AdminBean(0, "1997","1324","hjk");
         insertAdminAccount(testAdminBean);
 
         // 3. 해당 tc select
@@ -41,15 +34,12 @@ public class LoginTest {
         method.setAccessible(true);
         Optional<AdminBean> optional = (Optional<AdminBean>) method.invoke(loginController, testAdminBean);
 
-        session.rollback();
-
         if(!optional.isPresent()){
             Assertions.fail("id에 대응되는 데이터를 불러오지 못 함");
         }
     }
 
     @Test
-    @Rollback(true)
     public void 존재하지_않는_id() throws Exception {
         // 1. loginController 객체 생성
         LoginController loginController = new LoginController();
@@ -63,20 +53,15 @@ public class LoginTest {
         assertThat(optional).isEmpty();
     }
 
-
-    @Rollback(true)
     private void insertAdminAccount(AdminBean testAdminBean) throws Exception{
-        String resource = "mybatis-config.xml";
-        InputStream inputStream;
+        try {
+            MyBatisConfig myBatisConfig = new MyBatisConfig();
+            LoginService loginService = myBatisConfig.loginService();
 
-        inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-        session = sqlSessionFactory.openSession(false);
-        session.insert("mapper.AdminLogin.insertTestAdminUser",
-                testAdminBean);
-        session.commit();
-
+            loginService.InsertAdminBean(testAdminBean);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -13,5 +13,5 @@ public interface AdminMapper {
     AdminBean getAdminBean(AdminBean adminBean);
 
     @Insert("insert into admin (admin_id,password,name) values (#{admin_id},hex(AES_ENCRYPT(#{password},SHA2('key', 256))),#{name});")
-    int insertAdmin(@Param("admin_id") String admin_id, @Param("password") String password, @Param("name") String name);
+    int insertAdmin(AdminBean adminBean);
 }
