@@ -4,20 +4,15 @@ import com.hjkportfolio.hjk.MyBatisConfig;
 import com.hjkportfolio.hjk.exception.InsertFailException;
 import com.hjkportfolio.hjk.update.UpdateBean;
 import com.hjkportfolio.hjk.update.UpdateController;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.hjkportfolio.hjk.user.LoginService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,12 +23,11 @@ import java.util.List;
 public class UpdateTest {
 
     UpdateController updateController;
-    MyBatisConfig myBatisConfig;
 
     @BeforeEach
     void before() throws Exception {
-        myBatisConfig = new MyBatisConfig();
-        updateController = myBatisConfig.updateController();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
+        updateController = applicationContext.getBean("updateController", UpdateController.class);
     }
 
     @Test

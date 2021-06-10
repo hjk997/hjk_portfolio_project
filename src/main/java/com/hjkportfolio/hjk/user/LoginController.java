@@ -1,11 +1,14 @@
 package com.hjkportfolio.hjk.user;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
+import com.hjkportfolio.hjk.update.UpdateController;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -27,8 +30,8 @@ public class LoginController {
      */
     public Optional<AdminBean> getAdminBeanInDatabase(AdminBean adminBean) {
         try {
-            MyBatisConfig myBatisConfig = new MyBatisConfig();
-            LoginService loginService = myBatisConfig.loginService();
+            ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
+            LoginService loginService = applicationContext.getBean("loginService", LoginService.class);
 
             AdminBean optional = loginService.getAdminBean(adminBean);
 

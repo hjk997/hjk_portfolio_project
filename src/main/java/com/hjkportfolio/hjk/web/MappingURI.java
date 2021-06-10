@@ -1,7 +1,14 @@
 package com.hjkportfolio.hjk.web;
 
+import com.hjkportfolio.hjk.MyBatisConfig;
+import com.hjkportfolio.hjk.update.UpdateBean;
+import com.hjkportfolio.hjk.update.UpdateController;
 import com.hjkportfolio.hjk.user.AdminBean;
 import com.hjkportfolio.hjk.user.LoginController;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,8 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
+@Controller
 public class MappingURI {
 
     @GetMapping("")
@@ -79,7 +88,14 @@ public class MappingURI {
     }
 
     @GetMapping("update-list")
-    public String updateList(){
+    public String updateList(Model model){
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
+        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
+        List<UpdateBean> updateBeanList = updateController.getUpdateList();
+
+        model.addAttribute("updateBeanList", updateBeanList);
+
         return "update-list";
     }
 

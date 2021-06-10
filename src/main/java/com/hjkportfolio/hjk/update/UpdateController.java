@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
 public class UpdateController {
     @Autowired
     private SqlSession sqlSession;

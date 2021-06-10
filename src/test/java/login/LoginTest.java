@@ -6,6 +6,8 @@ import com.hjkportfolio.hjk.user.LoginController;
 import com.hjkportfolio.hjk.user.LoginService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,8 +57,8 @@ public class LoginTest {
 
     private void insertAdminAccount(AdminBean testAdminBean) throws Exception{
         try {
-            MyBatisConfig myBatisConfig = new MyBatisConfig();
-            LoginService loginService = myBatisConfig.loginService();
+            ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
+            LoginService loginService = applicationContext.getBean("loginService", LoginService.class);
 
             loginService.InsertAdminBean(testAdminBean);
         } catch (Exception e) {

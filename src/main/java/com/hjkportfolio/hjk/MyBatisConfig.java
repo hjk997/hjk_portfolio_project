@@ -4,16 +4,12 @@ import com.hjkportfolio.hjk.mapper.AdminMapper;
 import com.hjkportfolio.hjk.mapper.UpdateMapper;
 import com.hjkportfolio.hjk.update.UpdateController;
 import com.hjkportfolio.hjk.user.LoginService;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 

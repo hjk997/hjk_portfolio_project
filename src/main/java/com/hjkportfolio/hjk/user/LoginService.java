@@ -3,15 +3,9 @@ package com.hjkportfolio.hjk.user;
 import com.hjkportfolio.hjk.exception.InsertFailException;
 import com.hjkportfolio.hjk.mapper.AdminMapper;
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-@Controller
 public class LoginService {
 
     @Autowired

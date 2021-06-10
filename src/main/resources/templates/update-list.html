@@ -50,23 +50,11 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                              <td><a href="update">제목</a></td>
-                            <td>hjk</td>
-                            <td>2020-01-01</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>제목</td>
-                            <td>hjk</td>
-                            <td>2020-01-01</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>제목</td>
-                            <td>hjk</td>
-                            <td>2020-01-01</td>
+                          <tr th:each="post: ${updateBeanList}">
+                              <td th:text="${post.uid}" />
+                              <td th:text="${post.title}" />
+                              <td th:text="${post.name}" />
+                              <td th:text="${post.writeDate}" />
                           </tr>
                         </tbody>
                       </table>
