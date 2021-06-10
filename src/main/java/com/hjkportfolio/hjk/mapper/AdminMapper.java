@@ -2,8 +2,6 @@ package com.hjkportfolio.hjk.mapper;
 
 import com.hjkportfolio.hjk.user.AdminBean;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.mybatis.spring.annotation.MapperScan;
 

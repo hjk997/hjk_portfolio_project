@@ -1,6 +1,8 @@
 package com.hjkportfolio.hjk;
 
 import com.hjkportfolio.hjk.mapper.AdminMapper;
+import com.hjkportfolio.hjk.mapper.UpdateMapper;
+import com.hjkportfolio.hjk.update.UpdateController;
 import com.hjkportfolio.hjk.user.LoginService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,6 +30,7 @@ public class MyBatisConfig {
     public SqlSessionTemplate sqlSession() throws Exception {
         SqlSessionTemplate session = new SqlSessionTemplate(sqlSessionFactory());
         session.getConfiguration().addMapper(AdminMapper.class);
+        session.getConfiguration().addMapper(UpdateMapper.class);
         return session;
     }
 
@@ -44,6 +47,11 @@ public class MyBatisConfig {
     @Bean
     public LoginService loginService() throws Exception {
         return new LoginService(sqlSession());
+    }
+
+    @Bean
+    public UpdateController updateController() throws Exception {
+        return new UpdateController(sqlSession());
     }
 
 

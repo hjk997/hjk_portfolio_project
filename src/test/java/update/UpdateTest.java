@@ -1,5 +1,7 @@
 package update;
 
+import com.hjkportfolio.hjk.MyBatisConfig;
+import com.hjkportfolio.hjk.exception.InsertFailException;
 import com.hjkportfolio.hjk.update.UpdateBean;
 import com.hjkportfolio.hjk.update.UpdateController;
 import org.apache.ibatis.annotations.Update;
@@ -8,12 +10,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,59 +27,61 @@ import java.util.List;
 @Rollback(true)
 public class UpdateTest {
 
+    UpdateController updateController;
+    MyBatisConfig myBatisConfig;
+
+    @BeforeEach
+    void before() throws Exception {
+        myBatisConfig = new MyBatisConfig();
+        updateController = myBatisConfig.updateController();
+    }
+
     @Test
     public void 업데이트_글_가져오기(){
-        UpdateController updateController = new UpdateController();
 
         List<UpdateBean> updateBeanList = updateController.getUpdateList();
 
         if(updateBeanList == null){
             Assertions.fail("select 결과를 불러오지 못 함");
         }
-        System.out.println(updateBeanList.get(0).toString());
     }
 
     @Test
-    public void 업데이트_글_작성하기(){
-        UpdateController updateController = new UpdateController();
-        String title = "title";
-        UpdateBean updateBean1 = new UpdateBean(0, title, new Date(), "contents", 1, "hjk");
+    public void 업데이트_글_작성하기() throws InsertFailException {
+        String title = "test_table";
+        UpdateBean updateBean1 = new UpdateBean(1, title, new Date(), "contents", 1, "hjk");
 
-        int flag = updateController.insertUpdateTable(updateBean1);
-
-        if(flag == 0)
-            Assertions.fail("insert 실패");
-
-        UpdateBean updateBean2 = getUpdateBean(title);
-
-        if(updateBean2.getName() != updateBean1.getName() || updateBean2.getContents() != updateBean2.getContents()){
-            Assertions.fail("insert가 제대로 수행되지 않음");
-        }
-
-
+        updateController.insertUpdateTable(updateBean1);
     }
 
-    public UpdateBean getUpdateBean(String title){
-        String resource = "mybatis-config.xml";
-        InputStream inputStream;
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void 업데이트_글_수정하기() throws InsertFailException {
+        String title = "test_table3";
+        UpdateBean updateBean1 = new UpdateBean(6, title, new Date(), "contents1234", 1, "hjk");
 
-        try {
-            inputStream = Resources.getResourceAsStream(resource);
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-            try (SqlSession session = sqlSessionFactory.openSession()) {
-                UpdateBean updateBean = session.selectOne("mapper.Update.selectOneUpdate", title);
-
-                session.close();
-                return updateBean;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
+        updateController.updateUpdateTable(updateBean1);
     }
 
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void 업데이트_글_삭제하기() throws InsertFailException {
 
+        updateController.deleteUpdateTable(6);
+    }
+
+    @Test
+    public void 글_가져오기_테스트() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
+        UpdateBean updateBean1 = new UpdateBean(4, "test_table", dateFormat.parse("금 6월 11 03:00:35 2021"), "contents", 1, "hjk");
+
+        UpdateBean updateBean2 = updateController.getUpdatePost(4);
+        System.out.println(updateBean2.toString());
+
+        org.junit.jupiter.api.Assertions.assertEquals(updateBean1, updateBean2);
+
+    }
 
 }
