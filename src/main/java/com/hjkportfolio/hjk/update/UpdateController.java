@@ -28,23 +28,8 @@ public class UpdateController {
     }
 
     public List<UpdateBean> getUpdateList(){
-        String resource = "mybatis-config.xml";
-        InputStream inputStream;
-
-        try {
-            inputStream = Resources.getResourceAsStream(resource);
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-            try (SqlSession session = sqlSessionFactory.openSession()) {
-                List<UpdateBean> updateBeanList = session.selectList("mapper.Update.selectUpdate");
-
-                session.close();
-                return updateBeanList;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<UpdateBean> updateBeanList = updateMapper.getUpdateTableList();
+        return updateBeanList;
     }
 
     public UpdateBean getUpdatePost(int uid){

@@ -34,36 +34,39 @@
 
         <!-- 게시판 -->
           <div id="update-list">
-            <form action="" method="POST">
+            <form action="update/post/write" method="POST">
+              <input type="hidden" id="uid" name="uid" value=0>
+              <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}">
               <div class="form-group row">
-                <label for="staticEmail" class="col-2">제목</label>
+                <label for="title" class="col-2">제목</label>
                 <div class="col">
-                  <input class="form-control" type="text" />
+                  <input class="form-control" id="title" name="title" type="text" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="staticEmail" class="col-2">작성자</label>
+                <label for="name" class="col-2">작성자</label>
                 <div class="col">
-                  <input class="form-control" type="text" />
+                  <input class="form-control" id="name" name="name" type="text" th:value="${session.name}" readonly="true" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="staticEmail" class="col-2">내용</label>
+                <label for="contents" class="col-2">내용</label>
                 <div class="col">
-                <textarea class="form-control col overflow-auto" id="exampleFormControlTextarea1" rows="15"  style="resize: none;"></textarea>
+                <textarea class="form-control col overflow-auto" id="contents" name="contents" rows="15"  style="resize: none;"></textarea>
                 </div>
               </div>
-            </form>
-          </div>
-          <div class="row justify-content-md-center my-5">
+              <div class="row justify-content-md-center my-5">
             <span class=" mx-3">
-              <button type="button" class="btn btn-dark">작성</button>
+              <button type="submit" class="btn btn-dark">작성</button>
             </span>
-            <span class=" mx-3">
+                <span class=" mx-3">
               <button type="button" class="btn btn-dark">취소</button>
             </span>
 
+              </div>
+            </form>
           </div>
+
         </div>
 
       </div>

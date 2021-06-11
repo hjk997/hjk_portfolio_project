@@ -3,6 +3,8 @@ package com.hjkportfolio.hjk;
 import com.hjkportfolio.hjk.mapper.AdminMapper;
 import com.hjkportfolio.hjk.mapper.UpdateMapper;
 import com.hjkportfolio.hjk.update.UpdateController;
+import com.hjkportfolio.hjk.update.UpdateService;
+import com.hjkportfolio.hjk.user.LoginController;
 import com.hjkportfolio.hjk.user.LoginService;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -41,14 +43,13 @@ public class MyBatisConfig {
     }
 
     @Bean
-    public LoginService loginService() throws Exception {
-        return new LoginService(sqlSession());
+    public LoginController loginController() throws Exception {
+        return new LoginController(sqlSession());
     }
 
     @Bean
     public UpdateController updateController() throws Exception {
         return new UpdateController(sqlSession());
     }
-
 
 }

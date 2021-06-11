@@ -18,7 +18,7 @@ public interface UpdateMapper {
     @Delete("delete from update_table where uid=#{uid};")
     public void deleteUpdateTable(int uid);
 
-    @Select("SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid;")
+    @Select("SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid order by write_date desc;")
     public List<UpdateBean> getUpdateTableList();
 
     @Select("SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid and update_table.uid=#{uid};")
