@@ -34,7 +34,7 @@
 
         <!-- 게시판 -->
           <div id="update-list">
-            <form action="update/post/write" method="POST">
+            <form action="update/post/write" id="update_write_form" method="POST">
               <input type="hidden" id="uid" name="uid" value=0>
               <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}">
               <div class="form-group row">
@@ -57,10 +57,10 @@
               </div>
               <div class="row justify-content-md-center my-5">
             <span class=" mx-3">
-              <button type="submit" class="btn btn-dark">작성</button>
+              <button type="button" class="btn btn-dark" onclick="check_input()">작성</button>
             </span>
                 <span class=" mx-3">
-              <button type="button" class="btn btn-dark">취소</button>
+              <button type="button" class="btn btn-dark" onclick="location.href='/update-list'">취소</button>
             </span>
 
               </div>
@@ -75,6 +75,25 @@
 
   <!-- Footer-->
 <div th:replace="/footer"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="failedLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">업데이트 글 작성 실패</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <h5 id="modal_error_text" class="page-section-heading text-center text-uppercase text-secondary mb-3"></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 <script th:inline="javascript" th:src="@{/js/write-update.js}"></script>
 <script src="/js/common.js"></script>
