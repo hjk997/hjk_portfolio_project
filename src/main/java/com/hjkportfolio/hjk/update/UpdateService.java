@@ -38,7 +38,16 @@ public class UpdateService {
     }
 
     @GetMapping("update")
-    public String Update(){
+    public String Update(String id, Model model){
+
+        // 해당 게시글 찾아서 Bean 형태로 return 해주기
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
+        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
+        UpdateBean updatePost = updateController.getUpdatePost(Integer.parseInt(id));
+
+        model.addAttribute("updatePost", updatePost);
+
         return "update";
     }
 
