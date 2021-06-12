@@ -33,7 +33,10 @@
             <hr />
 
             <!-- 게시판 -->
-            <div id="update-list">
+            <div id="update-post">
+                <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}">
+                <input type="hidden" id="writer-uid" name="writer-uid" th:value="${updatePost.writerUid}">
+                <input type="hidden" id="user-uid" name="user-uid" th:value="${session.uid}">
                 <table class="table table-bordered table-responsive-lg">
                     <colgroup>
                         <col width="15%"/>
@@ -59,8 +62,8 @@
                 </table>
             </div>
             <div class="row justify-content-md-center ml-3">
-                <button type="button" class="btn btn-dark" onclick="location.href='write-update'">수정</button>
-                <button type="button" class="btn btn-dark">삭제</button>
+                <button type="button" id="update_btn" class="btn btn-dark" onclick="check_update_post()">수정</button>
+                <button type="button" id="delete_btn" class="btn btn-dark" onclick="check_delete_post()">삭제</button>
                 <button type="button" class="btn btn-dark" onclick="location.href='update-list'">돌아가기</button>
             </div>
         </div>
@@ -71,6 +74,6 @@
 <div th:replace="/footer"></div>
 </body>
 
-<script th:inline="javascript" th:src="@{/js/update-list.js}"></script>
+<script th:inline="javascript" th:src="@{/js/update.js}"></script>
 <script src="/js/common.js"></script>
 </html>

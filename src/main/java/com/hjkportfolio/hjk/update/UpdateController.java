@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class UpdateController {
-    @Autowired
     private SqlSession sqlSession;
 
+    @Autowired
     UpdateMapper updateMapper;
 
     public UpdateController(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
-        updateMapper = sqlSession.getMapper(UpdateMapper.class);
+//        updateMapper = sqlSession.getMapper(UpdateMapper.class);
     }
 
     public List<UpdateBean> getUpdateList(){

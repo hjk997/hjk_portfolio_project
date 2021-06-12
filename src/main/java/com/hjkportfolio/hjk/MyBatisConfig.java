@@ -9,6 +9,7 @@ import com.hjkportfolio.hjk.user.LoginService;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
+@MapperScan("com.hjkportfolio.hjk.mapper")
 public class MyBatisConfig {
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception{
@@ -27,8 +29,8 @@ public class MyBatisConfig {
     @Bean
     public SqlSessionTemplate sqlSession() throws Exception {
         SqlSessionTemplate session = new SqlSessionTemplate(sqlSessionFactory());
-        session.getConfiguration().addMapper(AdminMapper.class);
-        session.getConfiguration().addMapper(UpdateMapper.class);
+//        session.getConfiguration().addMapper(AdminMapper.class);
+//        session.getConfiguration().addMapper(UpdateMapper.class);
         return session;
     }
 
@@ -51,5 +53,7 @@ public class MyBatisConfig {
     public UpdateController updateController() throws Exception {
         return new UpdateController(sqlSession());
     }
+
+
 
 }

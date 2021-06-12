@@ -66,4 +66,30 @@ public class UpdateService {
         return "redirect:/update-list";
     }
 
+    @PostMapping("update/post/update")
+    public String updatePost(UpdateBean updateBean, HttpSession httpSession){
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
+        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
+
+        //UpdateBean updateBean = new UpdateBean(0, title, new Date(), contents, (Integer) httpSession.getAttribute("uid"), String.valueOf(httpSession.getAttribute("name")));
+
+        updateBean.setUid(0);
+        updateBean.setWriterUid((Integer) httpSession.getAttribute("uid"));
+        updateController.insertUpdateTable(updateBean);
+
+        return "redirect:/update-list";
+    }
+
+    @GetMapping("update/post/delete")
+    public String deletePost(String id, HttpSession httpSession){
+        // db에서 해당 uid와 일치하는 글을 가져왔는데 그 글의 writer의 uid가 현재 로그인 된 유저의 uid와 같다면 변경 가능
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
+        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
+
+        updateController.deleteUpdateTable(Integer.parseInt(id));
+
+        return "redirect:/update-list";
+    }
+
 }

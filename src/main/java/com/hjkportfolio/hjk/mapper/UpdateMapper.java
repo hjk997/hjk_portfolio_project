@@ -7,7 +7,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import java.util.HashMap;
 import java.util.List;
 
-@MapperScan
+@Mapper
 public interface UpdateMapper {
     @Insert("insert into update_table(title, contents, writer_uid) value(#{title}, #{contents}, #{writerUid});")
     public void insertUpdateTable(UpdateBean updateBean);

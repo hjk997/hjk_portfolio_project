@@ -19,8 +19,10 @@ import java.util.Optional;
 
 public class LoginController {
 
-    @Autowired
     SqlSession sqlSession;
+
+    @Autowired
+    AdminMapper adminMapper;
 
     public LoginController(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
@@ -46,14 +48,14 @@ public class LoginController {
 
     private AdminBean getAdminBean(AdminBean adminBean){
         //return new AdminBean(0, "name", "name","name");
-        AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
+        adminMapper = sqlSession.getMapper(AdminMapper.class);
         AdminBean adminBean1 = adminMapper.getAdminBean(adminBean);
         return adminBean1;
     }
 
     public void InsertAdminBean(AdminBean adminBean) throws InsertFailException {
         //return new AdminBean(0, "name", "name","name");
-        AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
+        adminMapper = sqlSession.getMapper(AdminMapper.class);
         int flag = adminMapper.insertAdmin(adminBean);
 
         if(flag == 0){

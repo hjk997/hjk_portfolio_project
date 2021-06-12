@@ -2,10 +2,10 @@ package com.hjkportfolio.hjk.mapper;
 
 import com.hjkportfolio.hjk.user.AdminBean;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.mybatis.spring.annotation.MapperScan;
 
-@MapperScan
+@Mapper
 public interface AdminMapper {
     @Select("select * from admin WHERE admin_id=#{admin_id} and password = hex(AES_ENCRYPT(#{password},SHA2('key', 256)));")
     AdminBean getAdminBean(AdminBean adminBean);
