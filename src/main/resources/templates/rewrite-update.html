@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<th:block th:replace="/header"></th:block>
+
+<body id="page-top">
+<!-- Navigation-->
+<div th:insert="/nav::nav"></div>
+<!-- Masthead-->
+<header class="masthead text-black text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <tmpstyle style="background-color:white; opacity:0.3; z-index:-1;">
+            <img src="assets/img/main_image.jpg" title="메인 이미지" alt="메인 이미지" style="position:absolute; top:0; left:0; width: 100%; height: 80%; z-index:-1"/>
+        </tmpstyle>
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">업데이트</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0">웹 포트폴리오 사이트 업데이트 사항을 모아둔 게시판입니다.</p>
+    </div>
+</header>
+<!-- Portfolio Section-->
+<section class="page-section portfolio bg-primary" id="portfolio">
+    <div class="container">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-uppercase text-secondary mb-0">글 작성</h2>
+            <hr />
+
+            <!-- 게시판 -->
+            <div id="update-list">
+                <form action="update/post/update" id="update_write_form" method="POST">
+                    <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}">
+                    <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}">
+                    <div class="form-group row">
+                        <label for="title" class="col-2">제목</label>
+                        <div class="col">
+                            <input class="form-control" id="title" name="title" type="text" th:value="${updatePost.title}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-2">작성자</label>
+                        <div class="col">
+                            <input class="form-control" id="name" name="name" type="text" th:value="${session.name}" readonly="true" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="contents" class="col-2">내용</label>
+                        <div class="col">
+                            <textarea class="form-control col overflow-auto" id="contents" name="contents" rows="15" th:text="${updatePost.contents}" style="resize: none;">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center my-5">
+            <span class=" mx-3">
+              <button type="button" class="btn btn-dark" onclick="check_input()">작성</button>
+            </span>
+                        <span class=" mx-3">
+              <button type="button" class="btn btn-dark" onclick="location.href='/update-list'">취소</button>
+            </span>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+</section>
+
+<!-- Footer-->
+<div th:replace="/footer"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="failedLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">업데이트 글 작성 실패</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h5 id="modal_error_text" class="page-section-heading text-center text-uppercase text-secondary mb-3"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript" th:src="@{/js/write-update.js}"></script>
+<script src="/js/common.js"></script>
+</html>

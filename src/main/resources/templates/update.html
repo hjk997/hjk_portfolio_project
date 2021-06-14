@@ -32,14 +32,18 @@
             <h2 class="page-section-heading text-uppercase text-secondary mb-0">업데이트</h2>
             <hr />
 
+            <input type="hidden" id="user-uid" name="user-uid" th:value="${session.uid}"/>
+            <form id="post_form" name="post_form" method="post" action="">
             <!-- 게시판 -->
             <div id="update-post">
                     <table class="table table-bordered table-responsive-lg">
-                        <form id="post_form" name="post_form" method="post" action="">
 
-                        <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}">
-                        <input type="hidden" id="writer-uid" name="writer-uid" th:value="${updatePost.writerUid}">
-                        <input type="hidden" id="user-uid" name="user-uid" th:value="${session.uid}">
+                        <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}"/>
+                        <input type="hidden" id="writerUid" name="writerUid" th:value="${updatePost.writerUid}"/>
+                        <input type="hidden" id="title" name="title" th:value="${updatePost.title}"/>
+                        <input type="hidden" id="name" name="name" th:value="${updatePost.name}"/>
+                        <input type="hidden" id="contents" name="contents" th:value="${updatePost.contents}"/>
+
 
                         <colgroup>
                             <col width="15%"/>
@@ -55,14 +59,13 @@
                             <td>작성자</td>
                             <td th:text="${updatePost.name}"></td>
                             <td>작성일</td>
-                            <td th:text="${updatePost.writeDate}"></td>
+                            <td id="writeDate" name="writeDate" th:text="${updatePost.writeDate}"></td>
                         </tr>
                         <tr>
                             <td colspan="4"><div style="min-height:400px;" th:text="${updatePost.contents}">
 
                             </div></td>
                         </tr>
-                        </form>
                     </table>
 
             </div>
@@ -71,6 +74,8 @@
                 <button type="button" id="delete_btn" class="btn btn-dark" onclick="check_delete_post()">삭제</button>
                 <button type="button" class="btn btn-dark" onclick="location.href='update-list'">돌아가기</button>
             </div>
+
+            </form>
         </div>
     </div>
 </section>

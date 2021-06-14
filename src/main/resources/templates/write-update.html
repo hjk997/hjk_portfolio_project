@@ -35,12 +35,12 @@
         <!-- 게시판 -->
           <div id="update-list">
             <form action="update/post/write" id="update_write_form" method="POST">
-              <input type="hidden" id="uid" name="uid" value=0>
+              <input type="hidden" id="uid" name="uid" th:value="0">
               <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}">
               <div class="form-group row">
                 <label for="title" class="col-2">제목</label>
                 <div class="col">
-                  <input class="form-control" id="title" name="title" type="text" />
+                  <input class="form-control" id="title" name="title" type="text"/>
                 </div>
               </div>
               <div class="form-group row">

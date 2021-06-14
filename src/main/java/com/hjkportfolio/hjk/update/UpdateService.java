@@ -33,9 +33,12 @@ public class UpdateService {
         return "update-list";
     }
 
-    @PostMapping("write-update/update")
-    public String writeUpdate2(){
-        return "redirect:/write-update";
+    @PostMapping("rewrite-update")
+    public String rewriteUpdate(UpdateBean updateBean, Model model){
+
+        model.addAttribute("updatePost", updateBean);
+
+        return "rewrite-update";
     }
 
     @GetMapping("write-update")
@@ -65,9 +68,9 @@ public class UpdateService {
 
     @PostMapping("update/post/update")
     public String updatePost(UpdateBean updateBean, HttpSession httpSession){
-        updateBean.setUid(0);
+
         updateBean.setWriterUid((Integer) httpSession.getAttribute("uid"));
-        updateController.insertUpdateTable(updateBean);
+        updateController.updateUpdateTable(updateBean);
 
         return "redirect:/update-list";
     }
