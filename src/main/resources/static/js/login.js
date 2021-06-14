@@ -35,3 +35,5 @@ function check_input() {
     document.getElementById("login_form").submit();
     // 모두 확인 후 submit()
  }
+
+ set_modal_title("로그인 실패");

@@ -1,8 +1,3 @@
-function show_modal(error_text){
-    var modal_text = document.getElementById("modal_error_text");
-    modal_text.innerHTML = error_text;
-    $("#failedLoginModal").modal();
-}
 
 
 // TODO : 글을 작성하다가 세션이 만료되었을 때 글을 작성할 수 없다는 경고문 띄우기  
@@ -31,3 +26,5 @@ function check_input() {
     document.getElementById("update_write_form").submit();
     // 모두 확인 후 submit()
  }
+
+  set_modal_title("업데이트 글 작성 실패");

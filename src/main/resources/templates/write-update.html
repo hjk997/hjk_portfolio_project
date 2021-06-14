@@ -73,28 +73,12 @@
     </div>
   </section>
 
-  <!-- Footer-->
-<div th:replace="/footer"></div>
-
-<!-- Modal -->
-<div class="modal fade" id="failedLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">업데이트 글 작성 실패</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <h5 id="modal_error_text" class="page-section-heading text-center text-uppercase text-secondary mb-3"></h5>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- modal -->
+<div th:replace="@{/modal}"></div>
+<!-- Footer-->
+<div th:replace="@{/footer}"></div>
 </body>
+<script th:inline="javascript" th:src="@{/js/modal.js}"></script>
 <script th:inline="javascript" th:src="@{/js/write-update.js}"></script>
 <script src="/js/common.js"></script>
 </html>

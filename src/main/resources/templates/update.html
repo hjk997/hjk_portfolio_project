@@ -39,7 +39,7 @@
                     <table class="table table-bordered table-responsive-lg">
 
                         <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}"/>
-                        <input type="hidden" id="writerUid" name="writerUid" th:value="${updatePost.writerUid}"/>
+                        <input type="hidden" id="writer-uid" name="writer-uid" th:value="${updatePost.writerUid}"/>
                         <input type="hidden" id="title" name="title" th:value="${updatePost.title}"/>
                         <input type="hidden" id="name" name="name" th:value="${updatePost.name}"/>
                         <input type="hidden" id="contents" name="contents" th:value="${updatePost.contents}"/>
@@ -80,10 +80,13 @@
     </div>
 </section>
 
+<!-- modal -->
+<div th:replace="@{/modal}"></div>
 <!-- Footer-->
-<div th:replace="/footer"></div>
+<div th:replace="@{/footer}"></div>
 </body>
 
+<script th:inline="javascript" th:src="@{/js/modal.js}"></script>
 <script th:inline="javascript" th:src="@{/js/update.js}"></script>
 <script src="/js/common.js"></script>
 </html>

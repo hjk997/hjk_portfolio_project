@@ -43,6 +43,11 @@ public class MappingURI {
         return "footer";
     }
 
+    @GetMapping("modal")
+    public String modal(){
+        return "modal";
+    }
+
     @GetMapping("nav")
     public String nav(){
         return "nav";

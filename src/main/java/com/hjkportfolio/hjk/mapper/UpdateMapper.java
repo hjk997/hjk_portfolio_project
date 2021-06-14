@@ -2,9 +2,7 @@ package com.hjkportfolio.hjk.mapper;
 
 import com.hjkportfolio.hjk.update.UpdateBean;
 import org.apache.ibatis.annotations.*;
-import org.mybatis.spring.annotation.MapperScan;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Mapper
