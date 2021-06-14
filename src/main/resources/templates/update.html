@@ -34,32 +34,37 @@
 
             <!-- 게시판 -->
             <div id="update-post">
-                <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}">
-                <input type="hidden" id="writer-uid" name="writer-uid" th:value="${updatePost.writerUid}">
-                <input type="hidden" id="user-uid" name="user-uid" th:value="${session.uid}">
-                <table class="table table-bordered table-responsive-lg">
-                    <colgroup>
-                        <col width="15%"/>
-                        <col width="35%"/>
-                        <col width="15%"/>
-                        <col width="35%"/>
-                    </colgroup>
-                    <tr class="text-center">
-                        <td >제목</td>
-                        <td colspan="3" th:text="${updatePost.title}"></td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>작성자</td>
-                        <td th:text="${updatePost.name}"></td>
-                        <td>작성일</td>
-                        <td th:text="${updatePost.writeDate}"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><div style="min-height:400px;" th:text="${updatePost.contents}">
+                    <table class="table table-bordered table-responsive-lg">
+                        <form id="post_form" name="post_form" method="post" action="">
 
-                        </div></td>
-                    </tr>
-                </table>
+                        <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}">
+                        <input type="hidden" id="writer-uid" name="writer-uid" th:value="${updatePost.writerUid}">
+                        <input type="hidden" id="user-uid" name="user-uid" th:value="${session.uid}">
+
+                        <colgroup>
+                            <col width="15%"/>
+                            <col width="35%"/>
+                            <col width="15%"/>
+                            <col width="35%"/>
+                        </colgroup>
+                        <tr class="text-center">
+                            <td >제목</td>
+                            <td colspan="3" th:text="${updatePost.title}"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>작성자</td>
+                            <td th:text="${updatePost.name}"></td>
+                            <td>작성일</td>
+                            <td th:text="${updatePost.writeDate}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><div style="min-height:400px;" th:text="${updatePost.contents}">
+
+                            </div></td>
+                        </tr>
+                        </form>
+                    </table>
+
             </div>
             <div class="row justify-content-md-center ml-3">
                 <button type="button" id="update_btn" class="btn btn-dark" onclick="check_update_post()">수정</button>

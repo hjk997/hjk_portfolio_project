@@ -2,6 +2,7 @@ package com.hjkportfolio.hjk.update;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -20,16 +21,21 @@ import java.util.List;
 @Controller
 public class UpdateService {
 
+    @Autowired
+    UpdateController updateController;
+
     @GetMapping("update-list")
     public String updateList(Model model){
-
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
-        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
         List<UpdateBean> updateBeanList = updateController.getUpdateList();
 
         model.addAttribute("updateBeanList", updateBeanList);
 
         return "update-list";
+    }
+
+    @PostMapping("write-update/update")
+    public String writeUpdate2(){
+        return "redirect:/write-update";
     }
 
     @GetMapping("write-update")
@@ -41,9 +47,6 @@ public class UpdateService {
     public String Update(String id, Model model){
 
         // 해당 게시글 찾아서 Bean 형태로 return 해주기
-
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
-        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
         UpdateBean updatePost = updateController.getUpdatePost(Integer.parseInt(id));
 
         model.addAttribute("updatePost", updatePost);
@@ -53,12 +56,6 @@ public class UpdateService {
 
     @PostMapping("update/post/write")
     public String writePost(UpdateBean updateBean, HttpSession httpSession){
-
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
-        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
-
-        //UpdateBean updateBean = new UpdateBean(0, title, new Date(), contents, (Integer) httpSession.getAttribute("uid"), String.valueOf(httpSession.getAttribute("name")));
-
         updateBean.setUid(0);
         updateBean.setWriterUid((Integer) httpSession.getAttribute("uid"));
         updateController.insertUpdateTable(updateBean);
@@ -68,12 +65,6 @@ public class UpdateService {
 
     @PostMapping("update/post/update")
     public String updatePost(UpdateBean updateBean, HttpSession httpSession){
-
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
-        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
-
-        //UpdateBean updateBean = new UpdateBean(0, title, new Date(), contents, (Integer) httpSession.getAttribute("uid"), String.valueOf(httpSession.getAttribute("name")));
-
         updateBean.setUid(0);
         updateBean.setWriterUid((Integer) httpSession.getAttribute("uid"));
         updateController.insertUpdateTable(updateBean);
@@ -84,9 +75,6 @@ public class UpdateService {
     @GetMapping("update/post/delete")
     public String deletePost(String id, HttpSession httpSession){
         // db에서 해당 uid와 일치하는 글을 가져왔는데 그 글의 writer의 uid가 현재 로그인 된 유저의 uid와 같다면 변경 가능
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
-        UpdateController updateController = applicationContext.getBean("updateController", UpdateController.class);
-
         updateController.deleteUpdateTable(Integer.parseInt(id));
 
         return "redirect:/update-list";

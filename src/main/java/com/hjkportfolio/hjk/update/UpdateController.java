@@ -1,20 +1,10 @@
 package com.hjkportfolio.hjk.update;
 
-import com.hjkportfolio.hjk.exception.InsertFailException;
-import com.hjkportfolio.hjk.mapper.AdminMapper;
 import com.hjkportfolio.hjk.mapper.UpdateMapper;
-import com.hjkportfolio.hjk.user.AdminBean;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Optional;
 
 public class UpdateController {
     private SqlSession sqlSession;
@@ -24,7 +14,6 @@ public class UpdateController {
 
     public UpdateController(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
-//        updateMapper = sqlSession.getMapper(UpdateMapper.class);
     }
 
     public List<UpdateBean> getUpdateList(){
