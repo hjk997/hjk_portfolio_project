@@ -34,7 +34,7 @@
 
         <!-- 게시판 -->
           <div id="update-list">
-            <form action="update/post/write" id="update_write_form" method="POST">
+            <form action="write-update" id="update_write_form" method="POST">
               <input type="hidden" id="uid" name="uid" th:value="0">
               <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}">
               <div class="form-group row">

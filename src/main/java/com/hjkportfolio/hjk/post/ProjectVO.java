@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProjectBean {
+public class ProjectVO {
 
     int uid;
     int projectType;

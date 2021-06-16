@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-public class UpdateBean {
+public class UpdateVO {
     int uid;
     String title;
     Date writeDate;

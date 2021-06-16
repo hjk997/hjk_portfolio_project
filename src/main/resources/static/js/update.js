@@ -3,7 +3,7 @@
 function show_btn(){
     var update_btn = document.getElementById("update_btn");
     var delete_btn = document.getElementById("delete_btn");
-    var writer_uid = document.getElementById("writer-uid");
+    var writer_uid = document.getElementById("writerUid");
     var user_uid = document.getElementById("user-uid");
 
     if(writer_uid.value == user_uid.value){
@@ -18,7 +18,7 @@ function show_btn(){
 
 function check_update_post(){
     // write-update에 uid, writer_uid, title, contents 정보 보내주기
-    var writer_uid = document.getElementById("writer-uid");
+    var writer_uid = document.getElementById("writerUid");
         var user_uid = document.getElementById("user-uid");
         var post_uid = document.getElementById("uid");
 
@@ -35,13 +35,13 @@ function check_update_post(){
 }
 
 function check_delete_post(){
-    var writer_uid = document.getElementById("writer-uid");
+    var writer_uid = document.getElementById("writerUid");
     var user_uid = document.getElementById("user-uid");
     var post_uid = document.getElementById("uid");
 
     if(writer_uid.value == user_uid.value){
         // 삭제 가능
-        location.href='update/post/delete?id='+post_uid.value;
+        location.href='update/delete?id='+post_uid.value;
     }else{
         // 삭제 불가능
         // 경고 창 띄우기

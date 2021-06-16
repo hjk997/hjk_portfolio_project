@@ -3,7 +3,7 @@
         PUBLIC "-//user.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.Update">
-    <select id="selectUpdate" parameterType="String" resultType="com.hjkportfolio.hjk.update.UpdateBean">
+    <select id="selectUpdate" parameterType="String" resultType="com.hjkportfolio.hjk.update.UpdateVO">
         SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid;
     </select>
 </mapper>

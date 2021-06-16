@@ -1,9 +1,8 @@
 package login;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
-import com.hjkportfolio.hjk.user.AdminBean;
+import com.hjkportfolio.hjk.user.AdminVO;
 import com.hjkportfolio.hjk.user.LoginController;
-import com.hjkportfolio.hjk.user.LoginService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Method;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,11 +32,11 @@ public class LoginTest {
     @Transactional
     public void 테스트_데이터_insert() throws Exception {
         // 2. tc insert
-        AdminBean testAdminBean = new AdminBean(0, "1997","1324","hjk");
-        insertAdminAccount(testAdminBean);
+        AdminVO testAdminVO = new AdminVO(0, "1997","1324","hjk");
+        insertAdminAccount(testAdminVO);
 
         // 3. 해당 tc select
-        Optional<AdminBean> optional = loginController.getAdminBeanInDatabase(testAdminBean);
+        Optional<AdminVO> optional = loginController.login(testAdminVO);
 
         if(!optional.isPresent()){
             Assertions.fail("id에 대응되는 데이터를 불러오지 못 함");
@@ -48,15 +46,15 @@ public class LoginTest {
     @Test
     public void 존재하지_않는_id() throws Exception {
         // 2. db에 존재하지 않는 tc select
-        AdminBean testAdminBean = new AdminBean(0, "admin", "sdf","sdf");
-        Optional<AdminBean> optional = loginController.getAdminBeanInDatabase(testAdminBean);
+        AdminVO testAdminVO = new AdminVO(0, "admin", "sdf","sdf");
+        Optional<AdminVO> optional = loginController.login(testAdminVO);
 
         assertThat(optional).isEmpty();
     }
 
-    private void insertAdminAccount(AdminBean testAdminBean) throws Exception{
+    private void insertAdminAccount(AdminVO testAdminVO) throws Exception{
         try {
-            loginController.InsertAdminBean(testAdminBean);
+            loginController.insert(testAdminVO);
         } catch (Exception e) {
             e.printStackTrace();
         }

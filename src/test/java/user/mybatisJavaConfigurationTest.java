@@ -1,9 +1,8 @@
 package user;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
-import com.hjkportfolio.hjk.user.AdminBean;
+import com.hjkportfolio.hjk.user.AdminVO;
 import com.hjkportfolio.hjk.user.LoginController;
-import com.hjkportfolio.hjk.user.LoginService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,19 +26,19 @@ public class mybatisJavaConfigurationTest {
 
     @Test
     public void 데이터베이스_연결_확인() throws Exception {
-        AdminBean adminBean = new AdminBean(1, "hjk997", "345612", "hjk");
-        Optional<AdminBean> resultAdminBean = loginController.getAdminBeanInDatabase(adminBean);
+        AdminVO adminVO = new AdminVO(1, "hjk997", "345612", "hjk");
+        Optional<AdminVO> resultAdminBean = loginController.login(adminVO);
 
         if(resultAdminBean.isEmpty())
             Assertions.fail("데이터를 가져오지 못 함");
 
-        Assertions.assertThat(adminBean.getAdmin_id()).isEqualTo(resultAdminBean.get().getAdmin_id());
+        Assertions.assertThat(adminVO.getAdmin_id()).isEqualTo(resultAdminBean.get().getAdmin_id());
     }
 
     @Test
     public void 데이터베이스_insert_확인() throws Exception {
-        AdminBean adminBean = new AdminBean(1, "test4", "345612", "test");
-        loginController.InsertAdminBean(adminBean);
+        AdminVO adminVO = new AdminVO(1, "test4", "345612", "test");
+        loginController.insert(adminVO);
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ImageBean {
+public class ImageVO {
     int uid;
     int project_uid;
     String uuid;

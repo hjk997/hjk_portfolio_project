@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class OriginTagListBean {
+public class OriginTagListVO {
     int uid;
     String tagName;
 }

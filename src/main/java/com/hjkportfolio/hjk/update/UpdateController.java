@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class UpdateController {
+public class UpdateController{
     private SqlSession sqlSession;
 
     @Autowired
@@ -16,26 +16,26 @@ public class UpdateController {
         this.sqlSession = sqlSession;
     }
 
-    public List<UpdateBean> getUpdateList(){
-        List<UpdateBean> updateBeanList = updateMapper.getUpdateTableList();
-        return updateBeanList;
+    public List<UpdateVO> getUpdateList(){
+        List<UpdateVO> updateList = updateMapper.getUpdateTableList();
+        return updateList;
     }
 
-    public UpdateBean getUpdatePost(int uid){
+    public UpdateVO getUpdatePost(int uid){
         //return new AdminBean(0, "name", "name","name");
-        UpdateBean updateBean = updateMapper.selectUpdatePost(uid);
-        return updateBean;
+        UpdateVO updateVO = updateMapper.selectUpdatePost(uid);
+        return updateVO;
     }
 
-    public void insertUpdateTable(UpdateBean updateBean) {
+    public void insertUpdateTable(UpdateVO updateVO) {
         //return new AdminBean(0, "name", "name","name");
-        updateMapper.insertUpdateTable(updateBean);
+        updateMapper.insertUpdateTable(updateVO);
 
     }
 
-    public void updateUpdateTable(UpdateBean updateBean) {
+    public void updateUpdateTable(UpdateVO updateVO) {
         //return new AdminBean(0, "name", "name","name");
-        updateMapper.updateUpdateTable(updateBean);
+        updateMapper.updateUpdateTable(updateVO);
 
     }
 
@@ -44,4 +44,5 @@ public class UpdateController {
         updateMapper.deleteUpdateTable(uid);
 
     }
+
 }

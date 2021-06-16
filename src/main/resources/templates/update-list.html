@@ -50,7 +50,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr th:each="post: ${updateBeanList}">
+                          <tr th:each="post: ${updateList}">
                               <td th:text="${post.uid}" />
                               <td ><a th:href="@{/update(id=${post.uid})}" th:text="${post.title}" ></a></td>
                               <td th:text="${post.name}" />

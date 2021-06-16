@@ -10,63 +10,96 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-public class UpdateService {
+public class UpdateService{
 
     @Autowired
     UpdateController updateController;
 
+    /**
+     * 게시글 목록 확인
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("update-list")
     public String updateList(Model model){
-        List<UpdateBean> updateBeanList = updateController.getUpdateList();
+        List<UpdateVO> updateVOList = updateController.getUpdateList();
 
-        model.addAttribute("updateBeanList", updateBeanList);
+        model.addAttribute("updateList", updateVOList);
 
         return "update-list";
     }
 
-    @PostMapping("rewrite-update")
-    public String rewriteUpdate(UpdateBean updateBean, Model model){
-
-        model.addAttribute("updatePost", updateBean);
-
-        return "rewrite-update";
-    }
-
-    @GetMapping("write-update")
-    public String writeUpdate(){
-        return "write-update";
-    }
-
+    /**
+     * 게시글 확인
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("update")
-    public String Update(String id, Model model){
+    public String loadUpdate(String id, Model model){
 
         // 해당 게시글 찾아서 Bean 형태로 return 해주기
-        UpdateBean updatePost = updateController.getUpdatePost(Integer.parseInt(id));
+        UpdateVO updatePost = updateController.getUpdatePost(Integer.parseInt(id));
 
         model.addAttribute("updatePost", updatePost);
 
         return "update";
     }
 
-    @PostMapping("update/post/write")
-    public String writePost(UpdateBean updateBean, HttpSession httpSession){
-        updateBean.setUid(0);
-        updateBean.setWriterUid((Integer) httpSession.getAttribute("uid"));
-        updateController.insertUpdateTable(updateBean);
+    /**
+     * 게시글 작성
+     *
+     * @return
+     */
+    @GetMapping("write-update")
+    public String loadWriteUpdate(){
+        return "write-update";
+    }
+
+
+    @PostMapping("write-update")
+    public String insertPost(UpdateVO updateVO, HttpSession httpSession){
+        updateVO.setUid(0);
+        updateVO.setWriterUid((Integer) httpSession.getAttribute("uid"));
+        updateController.insertUpdateTable(updateVO);
 
         return "redirect:/update-list";
     }
 
-    @PostMapping("update/post/update")
-    public String updatePost(UpdateBean updateBean, HttpSession httpSession){
+    /**
+     * 게시글 수정
+     *
+     * @param updateVO
+     * @param model
+     * @return
+     */
+    @PostMapping("rewrite-update")
+    public String loadRewriteUpdate(UpdateVO updateVO, Model model){
 
-        updateBean.setWriterUid((Integer) httpSession.getAttribute("uid"));
-        updateController.updateUpdateTable(updateBean);
+        model.addAttribute("updatePost", updateVO);
+
+        return "rewrite-update";
+    }
+
+    @PostMapping("rewrite-update/update")
+    public String updatePost(UpdateVO updateVO, HttpSession httpSession){
+
+        updateVO.setWriterUid((Integer) httpSession.getAttribute("uid"));
+        updateController.updateUpdateTable(updateVO);
 
         return "redirect:/update-list";
     }
 
-    @GetMapping("update/post/delete")
+    /**
+     * 게시글 삭제
+     *
+     * @param id
+     * @param httpSession
+     * @return
+     */
+    @GetMapping("update/delete")
     public String deletePost(String id, HttpSession httpSession){
         // db에서 해당 uid와 일치하는 글을 가져왔는데 그 글의 writer의 uid가 현재 로그인 된 유저의 uid와 같다면 변경 가능
         updateController.deleteUpdateTable(Integer.parseInt(id));

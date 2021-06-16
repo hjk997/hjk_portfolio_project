@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AdminBean {
+public class AdminVO {
 
     int uid;
     private String admin_id;

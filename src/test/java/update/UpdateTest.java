@@ -2,9 +2,8 @@ package update;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
 import com.hjkportfolio.hjk.exception.InsertFailException;
-import com.hjkportfolio.hjk.update.UpdateBean;
+import com.hjkportfolio.hjk.update.UpdateVO;
 import com.hjkportfolio.hjk.update.UpdateController;
-import com.hjkportfolio.hjk.user.LoginService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@ public class UpdateTest {
     @Test
     public void 업데이트_글_가져오기(){
 
-        List<UpdateBean> updateBeanList = updateController.getUpdateList();
+        List<UpdateVO> updateBeanList = updateController.getUpdateList();
 
         if(updateBeanList == null){
             Assertions.fail("select 결과를 불러오지 못 함");
@@ -43,7 +42,7 @@ public class UpdateTest {
     @Test
     public void 업데이트_글_작성하기() throws InsertFailException {
         String title = "test_table";
-        UpdateBean updateBean1 = new UpdateBean(1, title, new Date(), "contents", 1, "hjk");
+        UpdateVO updateBean1 = new UpdateVO(1, title, new Date(), "contents", 1, "hjk");
 
         updateController.insertUpdateTable(updateBean1);
     }
@@ -53,7 +52,7 @@ public class UpdateTest {
     @Rollback(true)
     public void 업데이트_글_수정하기() throws InsertFailException {
         String title = "test_table3";
-        UpdateBean updateBean1 = new UpdateBean(6, title, new Date(), "contents1234", 1, "hjk");
+        UpdateVO updateBean1 = new UpdateVO(6, title, new Date(), "contents1234", 1, "hjk");
 
         updateController.updateUpdateTable(updateBean1);
     }
@@ -69,9 +68,9 @@ public class UpdateTest {
     @Test
     public void 글_가져오기_테스트() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
-        UpdateBean updateBean1 = new UpdateBean(4, "test_table", dateFormat.parse("금 6월 11 03:00:35 2021"), "contents", 1, "hjk");
+        UpdateVO updateBean1 = new UpdateVO(4, "test_table", dateFormat.parse("금 6월 11 03:00:35 2021"), "contents", 1, "hjk");
 
-        UpdateBean updateBean2 = updateController.getUpdatePost(4);
+        UpdateVO updateBean2 = updateController.getUpdatePost(4);
         System.out.println(updateBean2.toString());
 
         org.junit.jupiter.api.Assertions.assertEquals(updateBean1, updateBean2);

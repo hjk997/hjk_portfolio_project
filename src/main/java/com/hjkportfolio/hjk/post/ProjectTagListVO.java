@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProjectTagListBean {
+public class ProjectTagListVO {
     int uid;
     int projectUid;
     int tagUid;
