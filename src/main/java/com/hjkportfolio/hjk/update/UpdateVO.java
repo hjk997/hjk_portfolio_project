@@ -15,18 +15,19 @@ public class UpdateVO {
     Date writeDate;
     String contents;
     int writerUid;
+    int note;
     String name;
 
     @Override
     public String toString() {
-        return "UpdateBean{" +
+        return "UpdateVO{" +
                 "uid=" + uid +
                 ", title='" + title + '\'' +
                 ", writeDate=" + writeDate +
                 ", contents='" + contents + '\'' +
                 ", writerUid=" + writerUid +
-                ", name=" + name +
+                ", name='" + name + '\'' +
+                ", isNote=" + note +
                 '}';
     }
-
 }

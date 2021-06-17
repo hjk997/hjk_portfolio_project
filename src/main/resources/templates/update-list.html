@@ -50,11 +50,11 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr th:each="post: ${updateList}">
-                              <td th:text="${post.uid}" />
-                              <td ><a th:href="@{/update(id=${post.uid})}" th:text="${post.title}" ></a></td>
-                              <td th:text="${post.name}" />
-                              <td th:text="${post.writeDate}" />
+                          <tr th:each="post: ${updateList}" th:class="${post.note} == 1 ? 'table-note'">
+                                  <td th:text="${post.uid}" />
+                                  <td ><a th:class="${post.note} == 1 ? 'post-note'" th:href="@{/update(id=${post.uid})}" th:text="${post.title}" ></a></td>
+                                  <td th:text="${post.name}" />
+                                  <td th:text="${post.writeDate}" />
                           </tr>
                         </tbody>
                       </table>

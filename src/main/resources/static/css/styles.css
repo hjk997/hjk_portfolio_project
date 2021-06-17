@@ -10298,3 +10298,13 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+
+.post-note{
+    color : #dc3545;
+}
+
+.table-note{
+    color : #dc3545;
+    font-weight: bold;
+    background-color : #EAEAEA;
+}
