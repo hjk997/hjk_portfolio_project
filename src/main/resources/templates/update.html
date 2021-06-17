@@ -51,7 +51,7 @@
                             <col width="15%"/>
                             <col width="35%"/>
                         </colgroup>
-                        <tr class="text-center">
+                        <tr th:class="${updatePost.note}? 'text-center post-note' : 'text-center'">
                             <td >제목</td>
                             <td colspan="3" th:text="${updatePost.title}"></td>
                         </tr>
@@ -62,7 +62,7 @@
                             <td id="writeDate" name="writeDate" th:text="${updatePost.writeDate}"></td>
                         </tr>
                         <tr>
-                            <td colspan="4"><div style="min-height:400px;" th:text="${updatePost.contents}">
+                            <td colspan="4" ><div style="padding: 20px; min-height:400px;" th:text="${updatePost.contents}">
 
                             </div></td>
                         </tr>

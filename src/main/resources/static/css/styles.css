@@ -10301,6 +10301,7 @@ form .row:first-child .floating-label-form-group {
 
 .post-note{
     color : #dc3545;
+    font-weight: bold;
 }
 
 .table-note{

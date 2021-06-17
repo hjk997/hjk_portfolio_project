@@ -38,14 +38,16 @@
                     <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}">
                     <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}">
                     <div class="form-group row">
-                        <div class="col-3">
                             <label for="title" class="col-2">제목</label>
-                        </div>
+
                         <div class="col-6">
                             <input class="form-control" id="title" name="title" type="text" th:value="${updatePost.title}"/>
                         </div>
-                        <div class="col-3"><input type="checkbox" id="note-checkbox" name="note-checkbox"> 공지사항 설정</input></div>
+                        <div class="col-3">
+                            <input type="checkbox" class="form-check-input" id="note-checkbox" name="note-checkbox"/>
+                            <label class="form-check-label" for="note-checkbox">공지사항 설정</label>
                         <input type="hidden" id="note" name="note" th:value="${updatePost.note}"/>
+                    </div>
                     </div>
                     <div class="form-group row">
                         <label for="name" class="col-2">작성자</label>
