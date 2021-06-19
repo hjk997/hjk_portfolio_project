@@ -6,6 +6,7 @@ import com.hjkportfolio.hjk.update.UpdateController;
 import com.hjkportfolio.hjk.update.UpdateService;
 import com.hjkportfolio.hjk.user.LoginController;
 import com.hjkportfolio.hjk.user.LoginService;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,8 +14,11 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
+import java.io.Reader;
+import java.util.Properties;
 
 @Configuration
 @MapperScan("com.hjkportfolio.hjk.mapper")
@@ -36,11 +40,17 @@ public class MyBatisConfig {
 
     @Bean
     public DataSource dataSource() throws Exception{
+        String resource = "application.properties";
+        Properties properties = new Properties();
+
+        Reader reader = Resources.getResourceAsReader(resource);
+        properties.load(reader);
+
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/portfolio?characterEncoding=UTF-8&serverTimezone=UTC");
-        dataSourceBuilder.username("root");
-        dataSourceBuilder.password("3456");
+        dataSourceBuilder.driverClassName(properties.getProperty("spring.datasource.driver-class-name"));
+        dataSourceBuilder.url(properties.getProperty("spring.datasource.url"));
+        dataSourceBuilder.username(properties.getProperty("spring.datasource.username"));
+        dataSourceBuilder.password(properties.getProperty("spring.datasource.password"));
         return dataSourceBuilder.build();
     }
 

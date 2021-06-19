@@ -42,7 +42,7 @@ public class UpdateTest {
     @Test
     public void 업데이트_글_작성하기() throws InsertFailException {
         String title = "test_table";
-        UpdateVO updateBean1 = new UpdateVO(1, title, new Date(), "contents", 1, "hjk", 0);
+        UpdateVO updateBean1 = new UpdateVO(1, title, new Date(), "contents", 1, 0, "hjk");
 
         updateController.insertUpdateTable(updateBean1);
     }
@@ -52,7 +52,7 @@ public class UpdateTest {
     @Rollback(true)
     public void 업데이트_글_수정하기() throws InsertFailException {
         String title = "test_table3";
-        UpdateVO updateBean1 = new UpdateVO(6, title, new Date(), "contents1234", 1, "hjk", 0);
+        UpdateVO updateBean1 = new UpdateVO(6, title, new Date(), "contents1234", 1, 0, "hjk");
 
         updateController.updateUpdateTable(updateBean1);
     }
@@ -68,7 +68,7 @@ public class UpdateTest {
     @Test
     public void 글_가져오기_테스트() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
-        UpdateVO updateBean1 = new UpdateVO(4, "test_table", dateFormat.parse("금 6월 11 03:00:35 2021"), "contents", 1, "hjk", 0);
+        UpdateVO updateBean1 = new UpdateVO(4, "test_table", dateFormat.parse("금 6월 11 03:00:35 2021"), "contents", 1, 0, "hjk");
 
         UpdateVO updateBean2 = updateController.getUpdatePost(4);
         System.out.println(updateBean2.toString());
