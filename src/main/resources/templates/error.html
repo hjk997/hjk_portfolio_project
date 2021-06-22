@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<th:block th:replace="/header"></th:block>
+
+<body id="page-top">
+<!-- Navigation-->
+<div th:insert="/nav::nav"></div>
+<!-- Masthead-->
+<header class="masthead text-black text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <tmpstyle style="background-color:white; opacity:0.3; z-index:-1;">
+            <img src="assets/img/main_image.jpg" title="메인 이미지" alt="메인 이미지" style="position:absolute; top:0; left:0; width: 100%; height: 80%; z-index:-1"/>
+        </tmpstyle>
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Error 발생</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+</header>
+<!-- Portfolio Section-->
+<section class="page-section portfolio bg-primary" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <div class="mb-5">
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Error</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div>
+                <h4 class=" text-center text-uppercase text-secondary mb-0">문제가 발생했습니다! 다시 시도해주세요.
+                    <br/> 문제가 지속적으로 발생한다면 관계자에게 알려주세요. </h4>
+            </div>
+            <br>
+            <br>
+            <div class="mb-5 page-section-heading text-center">
+                <button class="btn btn-primary " onclick="location.href='\'">홈으로 돌아가기</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer-->
+<div th:replace="/footer"></div>
+</body>
+<script src="/js/common.js"></script>
+</html>
