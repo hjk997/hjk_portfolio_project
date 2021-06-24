@@ -2,6 +2,7 @@ package update;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
 import com.hjkportfolio.hjk.exception.InsertFailException;
+import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.update.UpdateVO;
 import com.hjkportfolio.hjk.update.UpdateController;
 import org.assertj.core.api.Assertions;
@@ -32,7 +33,7 @@ public class UpdateTest {
     @Test
     public void 업데이트_글_가져오기(){
 
-        List<UpdateVO> updateBeanList = updateController.getUpdateList();
+        List<UpdateVO> updateBeanList = updateController.getUpdateList(new Criteria());
 
         if(updateBeanList == null){
             Assertions.fail("select 결과를 불러오지 못 함");

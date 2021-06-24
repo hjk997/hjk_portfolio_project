@@ -1,5 +1,6 @@
 package com.hjkportfolio.hjk.mapper;
 
+import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.update.UpdateVO;
 import org.apache.ibatis.annotations.*;
 
@@ -16,8 +17,8 @@ public interface UpdateMapper {
     @Delete("delete from update_table where uid=#{uid};")
     public void deleteUpdateTable(int uid);
 
-    @Select("SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid order by note desc, write_date desc;")
-    public List<UpdateVO> getUpdateTableList();
+    @Select("SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid order by note desc, write_date desc limit #{skip}, #{amount};")
+    public List<UpdateVO> getUpdateTableList(Criteria criteria);
 
     @Select("SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid and update_table.uid=#{uid};")
     public UpdateVO selectUpdatePost(int uid);

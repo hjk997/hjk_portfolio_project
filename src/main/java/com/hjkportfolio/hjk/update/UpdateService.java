@@ -1,5 +1,6 @@
 package com.hjkportfolio.hjk.update;
 
+import com.hjkportfolio.hjk.post.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,8 @@ public class UpdateService{
      * @return
      */
     @GetMapping("update-list")
-    public String updateList(Model model){
-        List<UpdateVO> updateVOList = updateController.getUpdateList();
+    public String updateList(Model model, Criteria criteria){
+        List<UpdateVO> updateVOList = updateController.getUpdateList(criteria);
 
         model.addAttribute("updateList", updateVOList);
 
