@@ -1,6 +1,7 @@
 package com.hjkportfolio.hjk.update;
 
 import com.hjkportfolio.hjk.post.Criteria;
+import com.hjkportfolio.hjk.post.PageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class UpdateService{
         List<UpdateVO> updateVOList = updateController.getUpdateList(criteria);
 
         model.addAttribute("updateList", updateVOList);
+        model.addAttribute("pageMaker", new PageMaker(criteria, updateController.getTotal()));
 
         return "update-list";
     }

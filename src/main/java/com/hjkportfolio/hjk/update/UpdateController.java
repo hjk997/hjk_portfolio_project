@@ -46,4 +46,7 @@ public class UpdateController{
 
     }
 
+    public int getTotal() {
+        return updateMapper.getCntOfUpdatePost();
+    }
 }

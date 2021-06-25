@@ -62,18 +62,24 @@
                     </div>
 
                     <div>
+                        <form id="pageForm" method="get">
+                            <input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
+                            <input type="hidden" name="amount" value="${pageMaker.criteria.amount }">
+                        </form>
                       <button type="button" class="btn btn-dark" id="write-post" onclick="location.href='/write-update'">글쓰기</button>
 
                       <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                          <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                          <li th:if="${pageMaker.prev} == true" class="page-item">
+                            <a class="page-link" th:href="@{/update-list(pageNum=${pageMaker.startPage - 1}, amount=${pageMaker.criteria.amount})}" tabindex="-1" aria-disabled="true">Previous</a>
                           </li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
+
+                            <th:block th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                                <li class="page-item"><a class="page-link" th:href="@{/update-list(pageNum=${num}, amount=${pageMaker.criteria.amount})}" th:text="${num}"></a></li>
+                            </th:block>
+
+                            <li th:if="${pageMaker.next} == true" class="page-item">
+                            <a class="page-link" th:href="@{/update-list(pageNum=${pageMaker.endPage + 1}, amount=${pageMaker.criteria.amount})}">Next</a>
                           </li>
                         </ul>
                       </nav>

@@ -22,4 +22,7 @@ public interface UpdateMapper {
 
     @Select("SELECT update_table.*,admin.name FROM portfolio.update_table, portfolio.admin where update_table.writer_uid = admin.uid and update_table.uid=#{uid};")
     public UpdateVO selectUpdatePost(int uid);
+
+    @Select("SELECT count(*) FROM update_table;")
+    public int getCntOfUpdatePost();
 }
