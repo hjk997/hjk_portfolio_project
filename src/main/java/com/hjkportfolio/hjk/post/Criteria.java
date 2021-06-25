@@ -1,7 +1,5 @@
 package com.hjkportfolio.hjk.post;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @ToString

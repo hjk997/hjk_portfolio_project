@@ -70,17 +70,19 @@
 
                       <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                          <li th:if="${pageMaker.prev} == true" class="page-item">
-                            <a class="page-link" th:href="@{/update-list(pageNum=${pageMaker.startPage - 1}, amount=${pageMaker.criteria.amount})}" tabindex="-1" aria-disabled="true">Previous</a>
-                          </li>
+
+                            <li th:if="${pageMaker.prev} == true" class="page-item">
+                                <a class="page-link" th:href="@{/update-list(pageNum=${pageMaker.startPage - 1}, amount=${pageMaker.criteria.amount})}">Previous</a>
+                            </li>
 
                             <th:block th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
-                                <li class="page-item"><a class="page-link" th:href="@{/update-list(pageNum=${num}, amount=${pageMaker.criteria.amount})}" th:text="${num}"></a></li>
+                                <li th:class="${num} == ${pageMaker.criteria.pageNum } ? 'page-item active' : 'page-item'"><a class="page-link" th:href="@{/update-list(pageNum=${num}, amount=${pageMaker.criteria.amount})}" th:text="${num}"></a></li>
                             </th:block>
 
                             <li th:if="${pageMaker.next} == true" class="page-item">
                             <a class="page-link" th:href="@{/update-list(pageNum=${pageMaker.endPage + 1}, amount=${pageMaker.criteria.amount})}">Next</a>
                           </li>
+
                         </ul>
                       </nav>
                     </div>

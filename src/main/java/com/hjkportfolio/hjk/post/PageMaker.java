@@ -43,7 +43,7 @@ public class PageMaker {
         /* 시작 페이지(startPage)값이 1보다 큰 경우 true */
         this.prev = this.startPage > 1;
 
-        /* 마지막 페이지(endPage)값이 1보다 큰 경우 true */
+        /* 마지막 페이지(endPage)값이 맨 끝 페이지보다 작은 경우 true */
         this.next = this.endPage < realEnd;
     }
 }
