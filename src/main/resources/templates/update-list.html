@@ -76,7 +76,7 @@
                             </li>
 
                             <th:block th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
-                                <li th:class="${num} == ${pageMaker.criteria.pageNum } ? 'page-item active' : 'page-item'"><a class="page-link" th:href="@{/update-list(pageNum=${num}, amount=${pageMaker.criteria.amount})}" th:text="${num}"></a></li>
+                                <li th:class="${num} == ${pageMaker.criteria.pageNum} ? 'page-item active' : 'page-item'"><a class="page-link" th:href="@{/update-list(pageNum=${num}, amount=${pageMaker.criteria.amount})}" th:text="${num}"></a></li>
                             </th:block>
 
                             <li th:if="${pageMaker.next} == true" class="page-item">

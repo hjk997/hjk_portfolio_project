@@ -4,6 +4,7 @@ import lombok.ToString;
 
 @ToString
 public class Criteria {
+    // https://kimvampa.tistory.com/174?category=843151
     /* 현재 페이지 */
     private int pageNum;
 

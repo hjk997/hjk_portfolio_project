@@ -1,10 +1,6 @@
 package com.hjkportfolio.hjk;
 
-import com.hjkportfolio.hjk.mapper.AdminMapper;
-import com.hjkportfolio.hjk.mapper.UpdateMapper;
-import com.hjkportfolio.hjk.update.UpdateController;
 import com.hjkportfolio.hjk.update.UpdateService;
-import com.hjkportfolio.hjk.user.LoginController;
 import com.hjkportfolio.hjk.user.LoginService;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,7 +10,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 import java.io.Reader;
@@ -33,8 +28,6 @@ public class MyBatisConfig {
     @Bean
     public SqlSessionTemplate sqlSession() throws Exception {
         SqlSessionTemplate session = new SqlSessionTemplate(sqlSessionFactory());
-//        session.getConfiguration().addMapper(AdminMapper.class);
-//        session.getConfiguration().addMapper(UpdateMapper.class);
         return session;
     }
 
@@ -55,13 +48,13 @@ public class MyBatisConfig {
     }
 
     @Bean
-    public LoginController loginController() throws Exception {
-        return new LoginController(sqlSession());
+    public LoginService loginService() throws Exception {
+        return new LoginService(sqlSession());
     }
 
     @Bean
-    public UpdateController updateController() throws Exception {
-        return new UpdateController(sqlSession());
+    public UpdateService updateService() throws Exception {
+        return new UpdateService(sqlSession());
     }
 
 

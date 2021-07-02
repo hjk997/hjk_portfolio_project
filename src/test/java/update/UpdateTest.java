@@ -4,78 +4,125 @@ import com.hjkportfolio.hjk.MyBatisConfig;
 import com.hjkportfolio.hjk.exception.InsertFailException;
 import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.update.UpdateVO;
-import com.hjkportfolio.hjk.update.UpdateController;
+import com.hjkportfolio.hjk.update.UpdateService;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Transactional
 @Rollback(true)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UpdateTest {
 
-    UpdateController updateController;
+    @Autowired
+    UpdateService updateService;
+
+    static List<UpdateVO> updateBeanList;
 
     @BeforeEach
-    void before() throws Exception {
+    void before(){
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
-        updateController = applicationContext.getBean("updateController", UpdateController.class);
+        updateService = applicationContext.getBean("updateService", UpdateService.class);
     }
 
     @Test
+    @Order(1)
     public void 업데이트_글_가져오기(){
 
-        List<UpdateVO> updateBeanList = updateController.getUpdateList(new Criteria());
+        updateBeanList = updateService.getUpdateList(new Criteria());
 
-        if(updateBeanList == null){
-            Assertions.fail("select 결과를 불러오지 못 함");
+        org.junit.jupiter.api.Assertions.assertFalse(updateBeanList.isEmpty());
+    }
+
+    @Test
+    @Order(2)
+    public void 업데이트_글_작성하기() {
+        UpdateVO updateBean1 = updateBeanList.get(0);
+
+        updateBean1.setTitle("new title");
+        updateBean1.setContents("new contents");
+
+        try{
+            int code = updateService.insertUpdateTable(updateBean1);
+
+            org.junit.jupiter.api.Assertions.assertTrue(code > 0);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    @Order(3)
+    public void 글_가져오기_테스트() {
+        UpdateVO updateBean1 = updateBeanList.get(0);
+
+        UpdateVO updateBean2 = updateService.getUpdatePost(updateBean1.getUid());
+
+        org.junit.jupiter.api.Assertions.assertEquals(updateBean1, updateBean2);
+
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    @Order(4)
+    public void 업데이트_글_수정하기() {
+        UpdateVO updateBean1 = updateBeanList.get(1);
+
+        updateBean1.setTitle("new title");
+        updateBean1.setContents("new contents");
+
+        int code = updateService.updateUpdateTable(updateBean1);
+
+        org.junit.jupiter.api.Assertions.assertTrue(code > 0);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    @Order(5)
+    public void 업데이트_글_삭제하기() {
+        try{
+            UpdateVO updateBean1 = updateBeanList.get(2);
+            int code = updateService.deleteUpdateTable(updateBean1.getUid());
+
+            org.junit.jupiter.api.Assertions.assertTrue(code > 0);
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void 업데이트_글_작성하기() throws InsertFailException {
-        String title = "test_table";
-        UpdateVO updateBean1 = new UpdateVO(1, title, new Date(), "contents", 1, 0, "hjk");
-
-        updateController.insertUpdateTable(updateBean1);
-    }
-
-    @Test
     @Transactional
     @Rollback(true)
-    public void 업데이트_글_수정하기() throws InsertFailException {
-        String title = "test_table3";
-        UpdateVO updateBean1 = new UpdateVO(6, title, new Date(), "contents1234", 1, 0, "hjk");
+    @Order(5)
+    public void 업데이트_글_삭제_실패() {
+        try{
+            int code = updateService.deleteUpdateTable(35248);
 
-        updateController.updateUpdateTable(updateBean1);
+            org.junit.jupiter.api.Assertions.assertFalse(code > 0);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Test
-    @Transactional
-    @Rollback(true)
-    public void 업데이트_글_삭제하기() throws InsertFailException {
+    @Disabled
+    public void 페이징_불러오기(){
+        updateBeanList = updateService.getUpdateList(new Criteria());
 
-        updateController.deleteUpdateTable(6);
-    }
-
-    @Test
-    public void 글_가져오기_테스트() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
-        UpdateVO updateBean1 = new UpdateVO(4, "test_table", dateFormat.parse("금 6월 11 03:00:35 2021"), "contents", 1, 0, "hjk");
-
-        UpdateVO updateBean2 = updateController.getUpdatePost(4);
-        System.out.println(updateBean2.toString());
-
-        org.junit.jupiter.api.Assertions.assertEquals(updateBean1, updateBean2);
-
+        if(updateBeanList == null){
+            Assertions.fail("select 결과를 불러오지 못 함");
+        }
     }
 
 }

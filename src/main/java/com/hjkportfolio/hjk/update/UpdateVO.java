@@ -1,6 +1,7 @@
 package com.hjkportfolio.hjk.update;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
+@EqualsAndHashCode
 public class UpdateVO {
     int uid;
     String title;

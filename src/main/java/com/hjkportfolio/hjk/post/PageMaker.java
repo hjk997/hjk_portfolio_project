@@ -35,6 +35,10 @@ public class PageMaker {
         /* 전체 마지막 페이지 */
         int realEnd = (int)(Math.ceil(total * 1.0/criteria.getAmount()));
 
+//        if(criteria.getPageNum() > realEnd){
+//
+//        }
+
         /* 전체 마지막 페이지(realend)가 화면에 보이는 마지막페이지(endPage)보다 작은 경우, 보이는 페이지(endPage) 값 조정 */
         if(realEnd < this.endPage) {
             this.endPage = realEnd;
