@@ -62,7 +62,7 @@ public class UpdateTest {
     @Test
     @Order(3)
     public void 글_가져오기_테스트() {
-        UpdateVO updateBean1 = updateBeanList.get(0);
+        UpdateVO updateBean1 = updateBeanList.get(1);
 
         UpdateVO updateBean2 = updateService.getUpdatePost(updateBean1.getUid());
 
@@ -116,13 +116,21 @@ public class UpdateTest {
     }
 
     @Test
-    @Disabled
     public void 페이징_불러오기(){
-        updateBeanList = updateService.getUpdateList(new Criteria());
+        updateBeanList = updateService.getUpdateList(new Criteria(1, 10));
+        org.junit.jupiter.api.Assertions.assertFalse(updateBeanList.isEmpty());
+    }
 
-        if(updateBeanList == null){
-            Assertions.fail("select 결과를 불러오지 못 함");
-        }
+    @Test
+    public void 페이징_큰_amount값_불러오기(){
+        updateBeanList = updateService.getUpdateList(new Criteria(1, 25000));
+        org.junit.jupiter.api.Assertions.assertFalse(updateBeanList.isEmpty());
+    }
+
+    @Test
+    public void 페이징_범위_밖의_값_불러오기(){
+        updateBeanList = updateService.getUpdateList(new Criteria(175480, 0));
+        org.junit.jupiter.api.Assertions.assertTrue(updateBeanList.isEmpty());
     }
 
 }
