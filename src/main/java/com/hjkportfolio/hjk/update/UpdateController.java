@@ -25,12 +25,28 @@ public class UpdateController {
      */
     @GetMapping("update-list")
     public String updateList(Model model, Criteria criteria){
-        List<UpdateVO> updateVOList = updateService.getUpdateList(criteria);
+        int total = updateService.getTotal();
 
-        model.addAttribute("updateList", updateVOList);
-        model.addAttribute("pageMaker", new PageMaker(criteria, updateService.getTotal()));
+        // 페이지 값으로 들고온 값이 total보다 크면 페이지를 표시할 수 없다는 문구를 출력함
+        if(!criteria.isPageNumValid(total)){
+            System.out.println("false");
 
-        return "update-list";
+            // 에러가 발생했을 때는 이미지를, 아닐 때는 표를 출력하도록 하고 싶음...
+
+            criteria.setPageNum((int)total/10);
+            model.addAttribute("checkCode", 0);
+            model.addAttribute("pageMaker", new PageMaker(criteria, total));
+            return "update-list";
+        }else{
+            List<UpdateVO> updateVOList = updateService.getUpdateList(criteria);
+
+            model.addAttribute("updateList", updateVOList);
+            model.addAttribute("checkCode", 1);
+            model.addAttribute("pageMaker", new PageMaker(criteria, total));
+
+            return "update-list";
+        }
+
     }
 
     /**

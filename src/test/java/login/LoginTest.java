@@ -28,6 +28,12 @@ public class LoginTest {
     }
 
     @Test
+    public void ceil_test(){
+        int test = (int) Math.ceil(2 / 10.0) * 10;
+        System.out.println(test);
+    }
+
+    @Test
     @Rollback(true)
     @Transactional
     public void 테스트_데이터_insert() throws Exception {

@@ -52,4 +52,8 @@ public class Criteria {
     public void setSkip(int skip) {
         this.skip = skip;
     }
+
+    public boolean isPageNumValid(int total){
+        return skip > total || pageNum < 1 ? false : true;
+    }
 }

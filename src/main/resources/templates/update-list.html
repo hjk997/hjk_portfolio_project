@@ -25,6 +25,7 @@
                 <p class="masthead-subheading font-weight-light mb-0">웹 포트폴리오 사이트 업데이트 사항을 모아둔 게시판입니다.</p>
             </div>
         </header>
+
         <!-- Portfolio Section-->
         <section class="page-section portfolio bg-primary" id="portfolio">
             <div class="container">
@@ -32,6 +33,25 @@
                   <!-- Portfolio Section Heading-->
                   <h2 class="page-section-heading text-uppercase text-secondary mb-0">업데이트</h2>
                   <hr />
+                  <input type="hidden" id="list" name="list" th:value="${checkCode}"/>
+
+                  <div class="mb-5" id="error-div">
+                      <br>
+                      <br>
+                      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Error</h2>
+
+                      <!-- Icon Divider-->
+                      <div class="divider-custom">
+                          <div class="divider-custom-line"></div>
+                          <div class="divider-custom-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                          <div class="divider-custom-line"></div>
+                      </div>
+                      <div>
+                          <h4 class=" text-center text-uppercase text-secondary mb-0">페이지 범위가 잘못되었습니다.
+                      </div>
+                      <br>
+                      <br>
+                  </div>
 
                   <!-- 게시판 -->
                   <div id="update-list">
