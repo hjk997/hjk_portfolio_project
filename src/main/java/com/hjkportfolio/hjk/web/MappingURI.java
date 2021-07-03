@@ -48,25 +48,9 @@ public class MappingURI {
         return "info";
     }
 
-    @GetMapping("project")
-    public String project(){
-        return "project";
-    }
-
-    @GetMapping("project-list")
-    public String projectList(){
-        return "project-list";
-    }
-
     @GetMapping("tech-stack")
     public String techStack(){
         return "tech-stack";
     }
-
-    @GetMapping("write-project")
-    public String writeProject(){
-        return "write-project";
-    }
-
 
 }

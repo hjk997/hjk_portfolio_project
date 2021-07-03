@@ -14,7 +14,6 @@ public class ProjectVO {
     int uid;
     int projectType;
     int gradeType;
-    String techStack;
     String title;
     String summary;
     String part;

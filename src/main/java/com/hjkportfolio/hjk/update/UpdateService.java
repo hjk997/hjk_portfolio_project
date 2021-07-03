@@ -4,7 +4,6 @@ import com.hjkportfolio.hjk.mapper.UpdateMapper;
 import com.hjkportfolio.hjk.post.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class UpdateService {
     private SqlSession sqlSession;
 
     @Autowired
-    UpdateMapper updateMapper;
+    private UpdateMapper updateMapper;
 
     public UpdateService(SqlSession sqlSession) {
         this.sqlSession = sqlSession;
@@ -30,19 +29,19 @@ public class UpdateService {
     }
 
     public int insertUpdateTable(UpdateVO updateVO) {
-        //return new AdminBean(0, "name", "name","name");
+        //return success code
         return updateMapper.insertUpdateTable(updateVO);
 
     }
 
     public int updateUpdateTable(UpdateVO updateVO) {
-        //return new AdminBean(0, "name", "name","name");
+        //return success code
         return updateMapper.updateUpdateTable(updateVO);
 
     }
 
     public int deleteUpdateTable(int uid) {
-        //return new AdminBean(0, "name", "name","name");
+        //return success code
         return updateMapper.deleteUpdateTable(uid);
     }
 

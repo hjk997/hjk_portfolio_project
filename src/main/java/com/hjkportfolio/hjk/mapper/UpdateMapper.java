@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface UpdateMapper {
     @Insert("insert into update_table(title, contents, writer_uid, note) value(#{title}, #{contents}, #{writerUid}, #{note});")
-    public int insertUpdateTable(UpdateVO updateBean);
+    public int insertUpdateTable(UpdateVO updateVO);
 
     @Update("update update_table set title=#{title}, contents=#{contents}, note=#{note} where uid=#{uid};")
-    public int updateUpdateTable(UpdateVO updateBean);
+    public int updateUpdateTable(UpdateVO updateVO);
 
     @Delete("delete from update_table where uid=#{uid};")
     public int deleteUpdateTable(int uid);

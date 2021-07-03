@@ -1,11 +1,9 @@
 package update;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
-import com.hjkportfolio.hjk.exception.InsertFailException;
 import com.hjkportfolio.hjk.post.Criteria;
-import com.hjkportfolio.hjk.update.UpdateVO;
 import com.hjkportfolio.hjk.update.UpdateService;
-import org.assertj.core.api.Assertions;
+import com.hjkportfolio.hjk.update.UpdateVO;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -13,7 +11,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
 import java.util.List;
 
 @Transactional

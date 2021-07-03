@@ -1,5 +1,6 @@
 package com.hjkportfolio.hjk;
 
+import com.hjkportfolio.hjk.project.ProjectService;
 import com.hjkportfolio.hjk.update.UpdateService;
 import com.hjkportfolio.hjk.user.LoginService;
 import org.apache.ibatis.io.Resources;
@@ -57,6 +58,9 @@ public class MyBatisConfig {
         return new UpdateService(sqlSession());
     }
 
-
+    @Bean
+    public ProjectService projectService() throws Exception {
+        return new ProjectService(sqlSession());
+    }
 
 }
