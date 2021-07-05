@@ -34,6 +34,7 @@
                   <h2 class="page-section-heading text-uppercase text-secondary mb-0">업데이트</h2>
                   <hr />
                   <input type="hidden" id="list" name="list" th:value="${checkCode}"/>
+                  <input type="hidden" id="startPage" name="startPage" th:value="${pageMaker.startPage - 1}"/>
 
                   <div class="mb-5" id="error-div">
                       <br>
@@ -72,10 +73,10 @@
                         </thead>
                         <tbody>
                           <tr th:each="post: ${updateList}" th:class="${post.note} == 1 ? 'table-primary'">
-                                  <td th:text="${post.uid}" />
-                                  <td ><a th:class="${post.note} == 1 ? 'post-note'" th:href="@{/update(id=${post.uid})}" th:text="${post.title}" ></a></td>
-                                  <td th:text="${post.name}" />
-                                  <td th:text="${post.writeDate}" />
+                              <td th:text="${postStat.count + pageMaker.criteria.skip}"/>
+                              <td ><a th:class="${post.note} == 1 ? 'post-note'" th:href="@{/update(id=${post.uid})}" th:text="${post.title}" ></a></td>
+                              <td th:text="${post.name}" />
+                              <td th:text="${post.writeDate}" />
                           </tr>
                         </tbody>
                       </table>
