@@ -1,9 +1,13 @@
 package com.hjkportfolio.hjk.project;
 
 import com.hjkportfolio.hjk.mapper.ProjectMapper;
+import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.post.ProjectVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectService {
     private SqlSession sqlSession;
@@ -19,5 +23,8 @@ public class ProjectService {
         return projectMapper.insertProjectTable(projectVO);
     }
 
+    public List<ProjectVO> getProjectList(Criteria criteria){
+        return projectMapper.getProjectList(criteria);
+    }
 
 }

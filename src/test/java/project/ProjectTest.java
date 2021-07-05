@@ -1,6 +1,7 @@
 package project;
 
 import com.hjkportfolio.hjk.MyBatisConfig;
+import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.post.ProjectVO;
 import com.hjkportfolio.hjk.project.ProjectService;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +13,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Transactional
 @Rollback(true)
@@ -33,6 +36,15 @@ public class ProjectTest {
         int code = projectService.insertProjectTable(projectVO);
 
         Assertions.assertTrue(code > 0);
+    }
+
+    @Test
+    public void 프로젝트_리스트_가져오기(){
+        List<ProjectVO> list = projectService.getProjectList(new Criteria());
+
+        for(ProjectVO projectVO : list){
+            System.out.println(projectVO.toString());
+        }
     }
 
     @Test

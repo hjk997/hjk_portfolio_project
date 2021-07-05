@@ -1,8 +1,12 @@
 package com.hjkportfolio.hjk.mapper;
 
+import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.post.ProjectVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface ProjectMapper {
@@ -10,4 +14,6 @@ public interface ProjectMapper {
             "VALUES(#{projectType}, #{gradeType}, #{title}, #{summary}, #{part}, #{review}, #{link}, #{writerUid}, #{startedDate}, #{endedDate});")
     public int insertProjectTable(ProjectVO projectVO);
 
+    @Select("SELECT * FROM portfolio.project LIMIT #{skip}, #{amount};")
+    public List<ProjectVO> getProjectList(Criteria criteria);
 }
