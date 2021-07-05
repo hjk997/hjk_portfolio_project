@@ -2,7 +2,6 @@
 var user_span = document.getElementById("userName");
 var write_post_btn = document.getElementById("write-post");
 var code = document.getElementById("list");
-var startPage = document.getElementById("startPage").value;
 
 if(user_span.innerHTML){
 console.log("show");
@@ -27,8 +26,4 @@ if(code.value == 0 || code.value == '0'){
 
     error_div.style.display='none';
     update_list.style.display='block';
-}
-
-function getIndex(){
-    return "<td>"+(startPage + 1)+"</td>";
 }

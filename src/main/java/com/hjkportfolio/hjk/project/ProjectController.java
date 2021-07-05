@@ -4,6 +4,7 @@ import com.hjkportfolio.hjk.post.ProjectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,9 +29,10 @@ public class ProjectController {
         return "write-project";
     }
 
-    @GetMapping("project/update")
+    @PostMapping("project/update")
     public String updateProject(ProjectVO projectVO, HttpSession httpSession){
 
+        System.out.println("projectVO : " + projectVO.toString());
         projectService.insertProjectTable(projectVO);
 
         return "redirect:/project-list";

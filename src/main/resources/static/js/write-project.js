@@ -26,6 +26,25 @@ function check_input() {
 //        document.getElementById("note").value = 0;
 //    }
 
+
+    let radios = document.getElementsByName("grade");
+    let gradeType = document.getElementById("gradeType");
+    for (let i = 0; i < radios.length; i++) {
+        if (radios[i].type === 'radio' && radios[i].checked) {
+            // get value, set checked flag or do whatever you need to
+            gradeType.value = radios[i].value;
+            break;
+        }
+    }
+
+    let isTeam = document.getElementById("isTeam").checked;
+    let projectType = document.getElementById("projectType");
+    if(isTeam){
+        projectType.value = 0;
+    }else{
+        projectType.value = 1;
+    }
+
     document.getElementById("project_write_form").submit();
     // 모두 확인 후 submit()
  }

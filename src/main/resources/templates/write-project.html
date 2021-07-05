@@ -40,11 +40,15 @@
     </div>
 
       <form action="project/update" id="project_write_form" method="POST">
+        <input type="hidden" id="uid" name="uid" th:value="0"/>
+        <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}"/>
+        <input type="hidden" id="projectType" name="projectType"/>
+        <input type="hidden" id="gradeType" name="gradeType"/>
         <div class="container">
         <div class="form-group row">
           <label for="title" class="col-sm-1 col-form-label">제목</label>
           <div class="col-sm-6">
-            <input class="form-control" id="title" type="text" />
+            <input class="form-control" id="title" name="title" type="text" />
           </div>
           <div class="col-5">
             <span class="mx-2">
@@ -67,8 +71,8 @@
             </span>
             <span class="col-5">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="isTeam1" value="1">
-                <label class="form-check-label" for="isTeam1">팀 프로젝트</label>
+                <input class="form-check-input" type="checkbox" id="isTeam"/>
+                <label class="form-check-label" for="isTeam">팀 프로젝트</label>
               </div>
             </span>
           </div>
@@ -81,9 +85,9 @@
             <input class="form-control col-auto" id="writer" type="text" />
 
                 <label for="startedDate" class="col-2 col-form-label">개발 기간</label>
-                  <input class="form-control col-sm-3" id="startedDate" type="date" />
+                  <input class="form-control col-sm-3" id="startedDate" name="startedDate" type="date" />
                 <label for="endedDate" class="col-sm-1 col-form-label">~</label>
-                  <input class="form-control col-sm-3" id="endedDate" type="date" />
+                  <input class="form-control col-sm-3" id="endedDate" name="endedDate" type="date" />
 
         </div>
         </div>
@@ -105,14 +109,14 @@
         <div class="container">
         <div class="form-group row">
           <label for="summary">개요</label>
-          <textarea class="form-control" id="summary" rows="5"></textarea>
+          <textarea class="form-control" id="summary" name="summary" rows="5"></textarea>
         </div>
         </div>
 
         <div class="container">
         <div class="form-group row">
           <label for="part">담당 부분</label>
-          <textarea class="form-control" id="part" rows="5"></textarea>
+          <textarea class="form-control" id="part" name="part" rows="5"></textarea>
         </div>
         </div>
 
@@ -134,26 +138,27 @@
         <div class="container">
         <div class="form-group row">
           <label for="review">느낀 점</label>
-          <textarea class="form-control" id="review" rows="5"></textarea>
+          <textarea class="form-control" id="review" name="review" rows="5"></textarea>
         </div>
         </div>
 
         <div class="container">
         <div class="form-group row">
           <label for="link">참고 링크</label>
-          <input type="text" id="link" class="form-control custom-control-inline" />
+          <input type="text" id="link" name="link" class="form-control custom-control-inline" />
         </div>
         </div>
-      </form>
 
-      <div class="row justify-content-md-center my-5">
+        <div class="row justify-content-md-center my-5">
         <span class=" mx-3">
         <button type="button" class="btn btn-dark" onclick="check_input()">작성</button>
         </span>
-        <span class=" mx-3">
+          <span class=" mx-3">
         <button type="button" class="btn btn-dark" onclick="location.href='/project-list'">취소</button>
         </span>
-      </div>
+        </div>
+      </form>
+
 </section>
 
 <!-- Footer-->

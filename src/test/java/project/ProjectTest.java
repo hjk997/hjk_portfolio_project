@@ -5,6 +5,7 @@ import com.hjkportfolio.hjk.post.ProjectVO;
 import com.hjkportfolio.hjk.project.ProjectService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -32,6 +33,14 @@ public class ProjectTest {
         int code = projectService.insertProjectTable(projectVO);
 
         Assertions.assertTrue(code > 0);
+    }
+
+    @Test
+    @Disabled
+    public void projectVO_확인(){
+        ProjectVO projectVO = new ProjectVO(0, 0,1,"title","summary", "part","review","link", 1, new Date(), new Date());
+
+        System.out.println(projectVO.toString());
     }
 
 }

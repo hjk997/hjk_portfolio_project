@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 public class UpdateVO {
     int uid;
     String title;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date writeDate;
     String contents;
     int writerUid;
