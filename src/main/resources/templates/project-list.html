@@ -100,7 +100,7 @@
                 </span>
 
                   <!-- drop down -->
-                <span>
+                <span th:if="${session.uid == post.writerUid}">
                   <div class="dropdown">
                     <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fa fa-bars" aria-hidden="true"></i>
