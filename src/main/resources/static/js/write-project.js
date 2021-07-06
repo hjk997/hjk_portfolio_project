@@ -40,9 +40,9 @@ function check_input() {
     let isTeam = document.getElementById("isTeam").checked;
     let projectType = document.getElementById("projectType");
     if(isTeam){
-        projectType.value = 0;
-    }else{
         projectType.value = 1;
+    }else{
+        projectType.value = 0;
     }
 
     document.getElementById("project_write_form").submit();

@@ -11,11 +11,11 @@ import java.util.List;
 
 @Mapper
 public interface ProjectMapper {
-    @Insert("INSERT INTO portfolio.project(project_type, grade_type, title, summary, part, review, link, writer_uid, started_date, ended_date) \n" +
-            "VALUES(#{projectType}, #{gradeType}, #{title}, #{summary}, #{part}, #{review}, #{link}, #{writerUid}, #{startedDate}, #{endedDate});")
+    @Insert("INSERT INTO portfolio.project(project_type, grade_type, title, tech_stack, summary, part, review, link, writer_uid, started_date, ended_date) \n" +
+            "VALUES(#{projectType}, #{gradeType}, #{title}, #{techStack}, #{summary}, #{part}, #{review}, #{link}, #{writerUid}, #{startedDate}, #{endedDate});")
     public int insertProjectTable(ProjectVO projectVO);
 
-    @Select("SELECT * FROM portfolio.project LIMIT #{skip}, #{amount};")
+    @Select("SELECT * FROM portfolio.project ORDER BY uid desc LIMIT #{skip}, #{amount};")
     public List<ProjectVO> getProjectList(Criteria criteria);
 
     @Select("SELECT * FROM portfolio.project WHERE uid = #{uid};")

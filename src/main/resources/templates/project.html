@@ -34,7 +34,7 @@
         <div >
           <h2 class="page-section-heading text-uppercase text-secondary mb-0" style="display:inline;" th:text="${project.title}"/>
           <img th:src="@{${'assets/img/project/' + project.gradeType + '_grade.png'}}" th:alt="${project.gradeType}+'grade'" style="width:3.5em;"/>
-          <img src="assets/img/project/team.png" alt="image" style="width:3.5em;"/>
+          <img th:if="${project.projectType == 1}" src="assets/img/project/team.png" alt="image" style="width:3.5em;"/>
         </div>
         <div th:if="${session.uid == project.writerUid}" class="dropdown">
                     <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,10 +67,10 @@
       </div>
 
       <div class="row my-5">
-        <div class="col">
+        <div class="col-2">
         사용 도구:
         </div>
-
+        <div class="col" th:text="${project.techStack}"/>
       </div>
       <div class="row my-5">
         <div class="col-2">

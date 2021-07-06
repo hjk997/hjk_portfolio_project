@@ -34,7 +34,7 @@ public class ProjectTest {
     @Disabled
     public void 프로젝트_테스트_게시글_생성(){
         for(int i = 0 ; i < 100 ; i++){
-            ProjectVO projectVO = new ProjectVO(0, 0,1,"title"+i,"summary"+i, "part","review","link", 1, new Date(), new Date());
+            ProjectVO projectVO = new ProjectVO(0, 0,1,"title"+i, "techStack","summary"+i, "part","review","link", 1, new Date(), new Date());
 
             int code = projectService.insertProjectTable(projectVO);
         }
@@ -42,7 +42,7 @@ public class ProjectTest {
 
     @Test
     public void 프로젝트_게시글_삽입(){
-        ProjectVO projectVO = new ProjectVO(0, 0,1,"title","summary", "part","review","link", 1, new Date(), new Date());
+        ProjectVO projectVO = new ProjectVO(0, 0,1,"title","techStack","summary", "part","review","link", 1, new Date(), new Date());
 
         int code = projectService.insertProjectTable(projectVO);
 
@@ -61,9 +61,11 @@ public class ProjectTest {
     @Test
     @Disabled
     public void projectVO_확인(){
-        ProjectVO projectVO = new ProjectVO(0, 0,1,"title","summary", "part","review","link", 1, new Date(), new Date());
+        if(!list.isEmpty()) {
+            ProjectVO projectVO = list.get(0);
 
-        System.out.println(projectVO.toString());
+            System.out.println(projectVO.toString());
+        }
     }
 
     @Test
