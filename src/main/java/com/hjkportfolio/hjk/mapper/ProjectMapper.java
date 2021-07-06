@@ -16,4 +16,7 @@ public interface ProjectMapper {
 
     @Select("SELECT * FROM portfolio.project LIMIT #{skip}, #{amount};")
     public List<ProjectVO> getProjectList(Criteria criteria);
+
+    @Select("SELECT * FROM portfolio.project WHERE uid = #{uid};")
+    public ProjectVO getProject(int uid);
 }

@@ -1,12 +1,15 @@
 package com.hjkportfolio.hjk.project;
 
+import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.post.ProjectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ProjectController {
@@ -15,14 +18,20 @@ public class ProjectController {
     ProjectService projectService;
 
     @GetMapping("project")
-    public String project(){
+    public String project(int uid, Model model){
+
+        ProjectVO projectVO = projectService.getProject(uid);
+
+        model.addAttribute("project", projectVO);
+
         return "project";
     }
 
     @GetMapping("project-list")
-    public String projectList(){
+    public String projectList(Model model, Criteria criteria){
+        List<ProjectVO> projectVOList = projectService.getProjectList(criteria);
 
-
+        model.addAttribute("projectList", projectVOList);
 
         return "project-list";
     }

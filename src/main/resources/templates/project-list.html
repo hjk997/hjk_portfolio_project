@@ -63,74 +63,37 @@
 
     <!-- 게시판 -->
       <div name="project-list"  class="container">
-        <div class="pb-3">
-          <div name="list1" class="row" >
-            <div class="col-4 imageContainer" >
-              <img src="assets/img/no-image.png" alt="image" />
-            </div>
-            <div class="col-8" >
-              <div class="ext-row">
-                <div class="pt-3" style="display: flex;
-                flex-direction: row; justify-content: space-between; ">
-                <span>
-                  <h4 style="display:inline;">프로젝트명</h4>
-                  <img src="assets/img/project/second.png" alt="2 grade" style="width:2.5em;"/>
-                  <img src="assets/img/project/team.png" alt="team project" style="width:2.5em;"/>
-                </span>
-                <span>
-                  <!-- drop down -->
-                  <div class="dropdown">
-                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">수정</a>
-                      <a class="dropdown-item" href="#">삭제</a>
-                    </div>
-                  </div>
-                </span>
-              </div>
-              <div>
-                내용설명
-              </div>
-            </div>
-          </div>
-          <div class="pb-3">
-            <button type="button" class="btn btn-outline-info">#java</button>
-            <button type="button" class="btn btn-outline-info">#mysql</button>
-          </div>
-        </div>
-        <div class="pb-3">
-          <div name="list1" class="row" >
-            <div class="col-4 imageContainer" >
-              <img src="assets/img/no-image.png" alt="image" />
-            </div>
-            <div class="col-8" >
-              <div class="ext-row">
-                <div class="pt-3" style="display: flex;
-                flex-direction: row; justify-content: space-between; ">
-                <span>
-                  <h4 style="display:inline;">프로젝트명</h4>
-                  <img src="assets/img/project/second.png" alt="2 grade" style="width:2.5em;"/>
-                  <img src="assets/img/project/team.png" alt="team project" style="width:2.5em;"/>
-                </span>
-                <span>
-                  <!-- drop down -->
-                  <div class="dropdown">
-                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">수정</a>
-                      <a class="dropdown-item" href="#">삭제</a>
-                    </div>
-                  </div>
 
+        <div class="pb-3">
+          <div  th:each="post : ${projectList}" name="list1" class="row" >
+            <div class="col-4 imageContainer" >
+              <img src="assets/img/no-image.png" alt="image" />
+            </div>
+            <div class="col-8" >
+              <div class="ext-row">
+                <div class="pt-3" style="display: flex;
+                flex-direction: row; justify-content: space-between; ">
+                <span>
+                  <a th:href="@{project(id=${post.uid})}"><h2 style="display:inline;" th:text="${post.title}"></h2></a>
+                  <img th:src="@{${'/assets/img/project/' + post.gradeType + '_grade.png'}}" alt="grade" style="width:2.5em;"/>
+                  <img th:if="${post.projectType}" src="assets/img/project/team.png" alt="team project" style="width:2.5em;"/>
                 </span>
+
+                  <!-- drop down -->
+                <span>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" th:href="@{/project/update(id=${post.uid})}">수정</a>
+                      <a class="dropdown-item" th:href="@{/project/delete(id=${post.uid})}">삭제</a>
+                    </div>
+                  </div>
+                </span>
+
               </div>
-              <div>
-                내용설명
-              </div>
+              <div th:text="${post.summary}"/>
             </div>
           </div>
           <div class="pb-3">
@@ -138,6 +101,8 @@
             <button type="button" class="btn btn-outline-info">#mysql</button>
           </div>
         </div>
+      </div>
+
       </div>
       <div class="container">
         <button type="button" class="btn btn-dark" id="write-post" onclick="location.href='/write-project'">글쓰기</button>

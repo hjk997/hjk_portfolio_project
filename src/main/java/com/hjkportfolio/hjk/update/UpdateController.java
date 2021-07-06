@@ -33,17 +33,14 @@ public class UpdateController {
             criteria.setPageNum((int)total/10);
             model.addAttribute("checkCode", 0);
             model.addAttribute("pageMaker", new PageMaker(criteria, total));
-            return "update-list";
         }else{
             List<UpdateVO> updateVOList = updateService.getUpdateList(criteria);
 
             model.addAttribute("updateList", updateVOList);
             model.addAttribute("checkCode", 1);
             model.addAttribute("pageMaker", new PageMaker(criteria, total));
-
-            return "update-list";
         }
-
+        return "update-list";
     }
 
     /**

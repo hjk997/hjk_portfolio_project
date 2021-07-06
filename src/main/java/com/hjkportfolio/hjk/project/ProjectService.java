@@ -27,4 +27,7 @@ public class ProjectService {
         return projectMapper.getProjectList(criteria);
     }
 
+    public ProjectVO getProject(int uid) {
+        return projectMapper.getProject(uid);
+    }
 }
