@@ -50,4 +50,11 @@ public class ProjectController {
         return "redirect:/project-list";
     }
 
+    @GetMapping("project/delete")
+    public String deleteProject(int id, HttpSession httpSession){
+
+        projectService.deleteProject(id);
+
+        return "redirect:/project-list";
+    }
 }

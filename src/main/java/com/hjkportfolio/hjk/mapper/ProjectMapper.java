@@ -2,6 +2,7 @@ package com.hjkportfolio.hjk.mapper;
 
 import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.post.ProjectVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,7 @@ public interface ProjectMapper {
 
     @Select("SELECT * FROM portfolio.project WHERE uid = #{uid};")
     public ProjectVO getProject(int uid);
+
+    @Delete("Delete FROM portfolio.project WHERE uid = #{uid};")
+    int deleteProject(int uid);
 }

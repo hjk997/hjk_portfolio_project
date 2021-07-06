@@ -55,4 +55,11 @@ public class ProjectTest {
         System.out.println(projectVO.toString());
     }
 
+    @Test
+    public void 프로젝트_삭제(){
+        int code = projectService.deleteProject(2);
+
+        Assertions.assertTrue(code > 0);
+    }
+
 }

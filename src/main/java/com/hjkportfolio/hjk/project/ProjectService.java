@@ -30,4 +30,8 @@ public class ProjectService {
     public ProjectVO getProject(int uid) {
         return projectMapper.getProject(uid);
     }
+
+    public int deleteProject(int id) {
+        return projectMapper.deleteProject(id);
+    }
 }
