@@ -18,9 +18,9 @@ public class ProjectController {
     ProjectService projectService;
 
     @GetMapping("project")
-    public String project(int uid, Model model){
+    public String project(int id, Model model){
 
-        ProjectVO projectVO = projectService.getProject(uid);
+        ProjectVO projectVO = projectService.getProject(id);
 
         model.addAttribute("project", projectVO);
 
