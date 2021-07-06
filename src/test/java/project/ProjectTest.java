@@ -22,11 +22,22 @@ import java.util.List;
 public class ProjectTest {
 
     ProjectService projectService;
+    List<ProjectVO> list;
 
     @BeforeEach
     void before() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
         projectService = applicationContext.getBean("projectService", ProjectService.class);
+    }
+
+    @Test
+    @Disabled
+    public void 프로젝트_테스트_게시글_생성(){
+        for(int i = 0 ; i < 100 ; i++){
+            ProjectVO projectVO = new ProjectVO(0, 0,1,"title"+i,"summary"+i, "part","review","link", 1, new Date(), new Date());
+
+            int code = projectService.insertProjectTable(projectVO);
+        }
     }
 
     @Test
@@ -40,7 +51,7 @@ public class ProjectTest {
 
     @Test
     public void 프로젝트_리스트_가져오기(){
-        List<ProjectVO> list = projectService.getProjectList(new Criteria());
+        list = projectService.getProjectList(new Criteria());
 
         for(ProjectVO projectVO : list){
             System.out.println(projectVO.toString());
@@ -57,7 +68,7 @@ public class ProjectTest {
 
     @Test
     public void 프로젝트_삭제(){
-        int code = projectService.deleteProject(2);
+        int code = projectService.deleteProject(list.get(1).getUid());
 
         Assertions.assertTrue(code > 0);
     }

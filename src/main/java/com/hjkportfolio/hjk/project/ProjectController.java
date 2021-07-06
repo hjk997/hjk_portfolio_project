@@ -1,6 +1,7 @@
 package com.hjkportfolio.hjk.project;
 
 import com.hjkportfolio.hjk.post.Criteria;
+import com.hjkportfolio.hjk.post.PageMaker;
 import com.hjkportfolio.hjk.post.ProjectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +30,21 @@ public class ProjectController {
 
     @GetMapping("project-list")
     public String projectList(Model model, Criteria criteria){
-        List<ProjectVO> projectVOList = projectService.getProjectList(criteria);
+        int total = projectService.getTotal();
 
-        model.addAttribute("projectList", projectVOList);
+        // 페이지 값으로 들고온 값이 total보다 크면 페이지를 표시할 수 없다는 문구를 출력함
+        if(!criteria.isPageNumValid(total)) {
+            // 에러가 발생했을 때는 이미지를, 아닐 때는 표를 출력
+            criteria.setPageNum((int) total / 10);
+            model.addAttribute("checkCode", 0);
+            model.addAttribute("pageMaker", new PageMaker(criteria, projectService.getTotal()));
+        }else{
+            List<ProjectVO> projectVOList = projectService.getProjectList(criteria);
+
+            model.addAttribute("projectList", projectVOList);
+            model.addAttribute("checkCode", 1);
+            model.addAttribute("pageMaker", new PageMaker(criteria, projectService.getTotal()));
+        }
 
         return "project-list";
     }

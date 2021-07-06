@@ -59,7 +59,7 @@
         <div class="col-2">
           개발 기간:
         </div>
-        <div class="col" th:text="${project.startedDate}+ ' ~ ' + ${project.endedDate}"/>
+        <div class="col" th:text="${#dates.format(project.startedDate, 'yyyy-MM-dd')}+ ' ~ ' + ${#dates.format(project.endedDate, 'yyyy-MM-dd')}"/>
         <div class="col-2">
           참고 주소:
         </div>

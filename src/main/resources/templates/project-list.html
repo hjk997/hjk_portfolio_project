@@ -63,8 +63,28 @@
 
     <!-- 게시판 -->
       <div name="project-list"  class="container">
+        <input type="hidden" id="list" name="list" th:value="${checkCode}"/>
+        <input type="hidden" id="startPage" name="startPage" th:value="${pageMaker.startPage - 1}"/>
 
-        <div class="pb-3">
+        <div class="mb-5" id="error-div">
+          <br>
+          <br>
+          <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Error</h2>
+
+          <!-- Icon Divider-->
+          <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="divider-custom-line"></div>
+          </div>
+          <div>
+            <h4 class=" text-center text-uppercase text-secondary mb-0">페이지 범위가 잘못되었습니다.
+          </div>
+          <br>
+          <br>
+        </div>
+
+        <div class="pb-3" id="project-list">
           <div  th:each="post : ${projectList}" name="list1" class="row" >
             <div class="col-4 imageContainer" >
               <img src="assets/img/no-image.png" alt="image" />
@@ -105,18 +125,27 @@
 
       </div>
       <div class="container">
+        <form id="pageForm" method="get">
+          <input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
+          <input type="hidden" name="amount" value="${pageMaker.criteria.amount }">
+        </form>
+
         <button type="button" class="btn btn-dark" id="write-post" onclick="location.href='/write-project'">글쓰기</button>
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+
+            <li th:if="${pageMaker.prev} == true" class="page-item">
+              <a class="page-link" th:href="@{/project-list(pageNum=${pageMaker.startPage - 1}, amount=${pageMaker.criteria.amount})}">Previous</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
+
+            <th:block th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+              <li th:class="${num} == ${pageMaker.criteria.pageNum} ? 'page-item active' : 'page-item'"><a class="page-link" th:href="@{/project-list(pageNum=${num}, amount=${pageMaker.criteria.amount})}" th:text="${num}"></a></li>
+            </th:block>
+
+            <li th:if="${pageMaker.next} == true" class="page-item">
+              <a class="page-link" th:href="@{/project-list(pageNum=${pageMaker.endPage + 1}, amount=${pageMaker.criteria.amount})}">Next</a>
             </li>
+
           </ul>
         </nav>
       </div>

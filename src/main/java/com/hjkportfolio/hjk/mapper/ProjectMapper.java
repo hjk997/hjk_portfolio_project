@@ -23,4 +23,7 @@ public interface ProjectMapper {
 
     @Delete("Delete FROM portfolio.project WHERE uid = #{uid};")
     int deleteProject(int uid);
+
+    @Select("SELECT COUNT(*) FROM portfolio.project;")
+    int getTotal();
 }

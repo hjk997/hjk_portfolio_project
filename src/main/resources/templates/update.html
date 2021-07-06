@@ -60,7 +60,7 @@
                             <td>작성자</td>
                             <td th:text="${updatePost.name}"></td>
                             <td>작성일</td>
-                            <td id="writeDate" name="writeDate" th:text="${updatePost.writeDate}"></td>
+                            <td id="writeDate" name="writeDate" th:text="${#dates.format(updatePost.writeDate, 'yyyy-MM-dd HH:mm')}"></td>
                         </tr>
                         <tr>
                             <td colspan="4" ><div style="padding: 20px; min-height:400px;" th:text="${updatePost.contents}">

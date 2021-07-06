@@ -34,4 +34,8 @@ public class ProjectService {
     public int deleteProject(int id) {
         return projectMapper.deleteProject(id);
     }
+
+    public int getTotal() {
+        return projectMapper.getTotal();
+    }
 }

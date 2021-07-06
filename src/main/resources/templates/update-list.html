@@ -76,7 +76,7 @@
                               <td th:text="${postStat.count + pageMaker.criteria.skip}"/>
                               <td ><a th:class="${post.note} == 1 ? 'post-note'" th:href="@{/update(id=${post.uid})}" th:text="${post.title}" ></a></td>
                               <td th:text="${post.name}" />
-                              <td th:text="${post.writeDate}" />
+                              <td th:text="${#dates.format(post.writeDate, 'yyyy-MM-dd')}" />
                           </tr>
                         </tbody>
                       </table>
