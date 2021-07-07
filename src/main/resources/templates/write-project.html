@@ -82,9 +82,9 @@
         <div class="container">
         <div class="form-group row">
                 <label for="startedDate" class="col-3 col-form-label">개발 기간</label>
-                  <input class="form-control col-sm-4" id="startedDate" name="startedDate" type="date" th:value="${project?.startedDate}"/>
+                  <input class="form-control col-sm-4" id="startedDate" name="startedDate" type="date" th:value="${#dates.format(project.startedDate, 'yyyy-MM-dd')}"/>
                 <label for="endedDate" class="col-sm-1 col-form-label">~</label>
-                  <input class="form-control col-sm-4" id="endedDate" name="endedDate" type="date" th:value="${project?.endedDate}"/>
+                  <input class="form-control col-sm-4" id="endedDate" name="endedDate" type="date" th:value="${#dates.format(project.endedDate, 'yyyy-MM-dd')}"/>
 
         </div>
         </div>

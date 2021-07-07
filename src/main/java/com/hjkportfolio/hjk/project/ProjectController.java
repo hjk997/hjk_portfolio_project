@@ -59,8 +59,7 @@ public class ProjectController {
     @PostMapping("write-project")
     public String updateProject(int uid, Model model){
 
-
-            model.addAttribute("project", projectService.getProject(uid));
+        model.addAttribute("project", projectService.getProject(uid));
 
         return "write-project";
     }
