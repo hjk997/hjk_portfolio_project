@@ -38,4 +38,8 @@ public class ProjectService {
     public int getTotal() {
         return projectMapper.getTotal();
     }
+
+    public int updateProjectTable(ProjectVO projectVO) {
+        return projectMapper.updateProjectTable(projectVO);
+    }
 }

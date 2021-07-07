@@ -67,8 +67,13 @@ public class ProjectController {
     @PostMapping("project/update")
     public String updateProject(ProjectVO projectVO, HttpSession httpSession){
 
-        System.out.println("projectVO : " + projectVO.toString());
-        projectService.insertProjectTable(projectVO);
+        if(projectVO.getUid() == 0){
+            // 삽입
+            projectService.insertProjectTable(projectVO);
+        }else{
+            // 수정
+            projectService.updateProjectTable(projectVO);
+        }
 
         return "redirect:/project-list";
     }
