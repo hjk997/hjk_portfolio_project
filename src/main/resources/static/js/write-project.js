@@ -1,8 +1,10 @@
 var projectType = document.getElementById("projectType").value;
 var gradeType = document.getElementById("gradeType").value;
 
-if(projectType){
+if(projectType == 1){
     document.getElementById("isTeam").checked=true;
+}else if(projectType == 0){
+    document.getElementById("isTeam").checked=false;
 }
 
 if(gradeType){
