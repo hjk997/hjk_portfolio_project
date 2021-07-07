@@ -66,26 +66,9 @@
         <input type="hidden" id="list" name="list" th:value="${checkCode}"/>
         <input type="hidden" id="startPage" name="startPage" th:value="${pageMaker.startPage - 1}"/>
 
-        <div class="mb-5" id="error-div">
-          <br>
-          <br>
-          <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Error</h2>
-
-          <!-- Icon Divider-->
-          <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <div class="divider-custom-line"></div>
-          </div>
-          <div>
-            <h4 class=" text-center text-uppercase text-secondary mb-0">페이지 범위가 잘못되었습니다.
-          </div>
-          <br>
-          <br>
-        </div>
-
         <div class="pb-3" id="project-list">
           <div  th:each="post : ${projectList}" name="list1" class="row" >
+
             <div class="col-4 imageContainer" >
               <img src="assets/img/no-image.png" alt="image" />
             </div>
@@ -106,7 +89,7 @@
                       <i class="fa fa-bars" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" th:href="@{/project/update(id=${post.uid})}">수정</a>
+                      <a class="dropdown-item" th:href="@{/write-project(id=${post.uid})}">수정</a>
                       <a class="dropdown-item" th:href="@{/project/delete(id=${post.uid})}">삭제</a>
                     </div>
                   </div>
@@ -124,6 +107,25 @@
       </div>
 
       </div>
+
+    <div class="mb-5" id="error-div">
+      <br>
+      <br>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Error</h2>
+
+      <!-- Icon Divider-->
+      <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="divider-custom-line"></div>
+      </div>
+      <div>
+        <h4 class=" text-center text-uppercase text-secondary mb-0">페이지 범위가 잘못되었습니다.
+      </div>
+      <br>
+      <br>
+    </div>
+
       <div class="container">
         <form id="pageForm" method="get">
           <input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">

@@ -51,15 +51,18 @@ public class ProjectController {
     }
 
     @GetMapping("write-project")
-    public String writeProject(){
+    public String writeProject(Optional<Integer> id, Model model){
+        if(id.isPresent()){
+            model.addAttribute("project", projectService.getProject(id.get()));
+        }
 
         return "write-project";
     }
 
     @PostMapping("write-project")
-    public String updateProject(int uid, Model model){
+    public String updateProject(int id, Model model){
 
-        model.addAttribute("project", projectService.getProject(uid));
+        model.addAttribute("project", projectService.getProject(id));
 
         return "write-project";
     }
