@@ -40,15 +40,15 @@
     </div>
 
       <form action="project/update" id="project_write_form" method="POST">
-        <input type="hidden" id="uid" name="uid" th:value="0"/>
+        <input type="hidden" id="uid" name="uid" th:value="${project?.uid}"/>
         <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}"/>
-        <input type="hidden" id="projectType" name="projectType"/>
-        <input type="hidden" id="gradeType" name="gradeType"/>
+        <input type="hidden" id="projectType" name="projectType" th:value="${project?.projectType}"/>
+        <input type="hidden" id="gradeType" name="gradeType" th:value="${project?.gradeType}"/>
         <div class="container">
         <div class="form-group row">
           <label for="title" class="col-sm-1 col-form-label">제목</label>
           <div class="col-sm-6">
-            <input class="form-control" id="title" name="title" type="text" />
+            <input class="form-control" id="title" name="title" type="text" th:value="${project?.title}"/>
           </div>
           <div class="col-5">
             <span class="mx-2">
@@ -81,13 +81,10 @@
 
         <div class="container">
         <div class="form-group row">
-          <label for="writer" class="col-auto">작성자</label>
-            <input class="form-control col-auto" id="writer" type="text" />
-
-                <label for="startedDate" class="col-2 col-form-label">개발 기간</label>
-                  <input class="form-control col-sm-3" id="startedDate" name="startedDate" type="date" />
+                <label for="startedDate" class="col-3 col-form-label">개발 기간</label>
+                  <input class="form-control col-sm-4" id="startedDate" name="startedDate" type="date" th:value="${project?.startedDate}"/>
                 <label for="endedDate" class="col-sm-1 col-form-label">~</label>
-                  <input class="form-control col-sm-3" id="endedDate" name="endedDate" type="date" />
+                  <input class="form-control col-sm-4" id="endedDate" name="endedDate" type="date" th:value="${project?.endedDate}"/>
 
         </div>
         </div>
@@ -112,7 +109,7 @@
               <label for="tag">사용 기술</label>
             </div>
             <div class="col-sm-3">
-              <input class="form-control" id="techStack" type="text" />
+              <input class="form-control" id="techStack" type="text" th:value="${project?.techStack}"/>
             </div>
           </div>
         </div>
@@ -120,14 +117,14 @@
         <div class="container">
         <div class="form-group row">
           <label for="summary">개요</label>
-          <textarea class="form-control" id="summary" name="summary" rows="5"></textarea>
+          <textarea class="form-control" id="summary" name="summary" rows="5">[[${project?.summary}]]</textarea>
         </div>
         </div>
 
         <div class="container">
         <div class="form-group row">
           <label for="part">담당 부분</label>
-          <textarea class="form-control" id="part" name="part" rows="5"></textarea>
+          <textarea class="form-control" id="part" name="part" rows="5">[[${project?.part}]]</textarea>
         </div>
         </div>
 
@@ -149,14 +146,14 @@
         <div class="container">
         <div class="form-group row">
           <label for="review">느낀 점</label>
-          <textarea class="form-control" id="review" name="review" rows="5"></textarea>
+          <textarea class="form-control" id="review" name="review" rows="5" >[[${project?.review}]]</textarea>
         </div>
         </div>
 
         <div class="container">
         <div class="form-group row">
           <label for="link">참고 링크</label>
-          <input type="text" id="link" name="link" class="form-control custom-control-inline" />
+          <input type="text" id="link" name="link" class="form-control custom-control-inline" th:value="${project?.link}" />
         </div>
         </div>
 

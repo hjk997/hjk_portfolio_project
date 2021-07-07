@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProjectController {
@@ -51,6 +52,16 @@ public class ProjectController {
 
     @GetMapping("write-project")
     public String writeProject(){
+
+        return "write-project";
+    }
+
+    @PostMapping("write-project")
+    public String updateProject(int uid, Model model){
+
+
+            model.addAttribute("project", projectService.getProject(uid));
+
         return "write-project";
     }
 

@@ -1,3 +1,14 @@
+var projectType = document.getElementById("projectType").value;
+var gradeType = document.getElementById("gradeType").value;
+
+if(projectType){
+    document.getElementById("isTeam").checked=true;
+}
+
+if(gradeType){
+    document.getElementById("grade"+gradeType).checked=true;
+}
+
 function check_input() {
 //    var title = document.getElementById('title');
 //
