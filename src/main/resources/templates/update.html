@@ -34,12 +34,12 @@
             <hr />
 
             <input type="hidden" id="user-uid" name="user-uid" th:value="${session.uid}"/>
-            <form id="post_form" name="post_form" method="post" action="">
+            <form id="post_form" name="post_form" method="GET" action="">
             <!-- 게시판 -->
             <div id="update-post">
                     <table class="table table-bordered table-responsive-lg">
 
-                        <input type="hidden" id="uid" name="uid" th:value="${updatePost.uid}"/>
+                        <input type="hidden" id="uid" name="uid" th:value='${updatePost.uid}'/>
                         <input type="hidden" id="writerUid" name="writerUid" th:value=${updatePost.writerUid} />
                         <input type="hidden" id="note" name="note" th:value=${updatePost.note} />
                         <input type="hidden" id="title" name="title" th:value="${updatePost.title}"/>

@@ -1,3 +1,9 @@
+var noteCheckbox = document.getElementById("note-checkbox").value;
+
+if(noteCheckbox){
+    document.getElementById("note-checkbox").checked=true;
+}
+
 function is_checked(){
     let note = document.getElementById("note").value;
     if(note == 1){

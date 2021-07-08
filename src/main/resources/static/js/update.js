@@ -26,8 +26,8 @@ function check_update_post(){
 
         if(writer_uid.value == user_uid.value){
             // 수정 가능
-            form.action="rewrite-update";
-            form.submit();
+            location.href='write-update?id=' + post_uid.value;
+
         }else{
             // 수정 불가능
             // 경고 창 띄우기

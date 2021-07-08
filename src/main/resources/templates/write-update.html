@@ -35,14 +35,14 @@
 
         <!-- 게시판 -->
           <div id="update-list">
-            <form action="write-update" id="update_write_form" method="POST">
-              <input type="hidden" id="uid" name="uid" th:value="0"/>
+            <form action="write-update/update" id="update_write_form" method="POST">
+              <input type="hidden" id="uid" name="uid" th:value="${post != null ? post?.uid : 0}"/>
               <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}"/>
               <div class="form-group row">
                 <label for="title" class="col-2">제목</label>
 
                 <div class="col-6">
-                  <input class="form-control" id="title" name="title" type="text"/>
+                  <input class="form-control" id="title" name="title" type="text" th:value="${post?.title}"/>
                 </div>
                 <div class="col-3">
                   <input type="checkbox" class="form-check-input" id="note-checkbox" name="note-checkbox"/>
@@ -59,7 +59,7 @@
               <div class="form-group row">
                 <label for="contents" class="col-2">내용</label>
                 <div class="col">
-                <textarea class="form-control col overflow-auto" id="contents" name="contents" rows="15"  style="resize: none;"></textarea>
+                <textarea class="form-control col overflow-auto" id="contents" name="contents" rows="15"  style="resize: none;">[[${post?.contents}]]</textarea>
                 </div>
               </div>
               <div class="row justify-content-md-center my-5">

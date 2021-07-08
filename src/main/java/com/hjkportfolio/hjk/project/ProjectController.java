@@ -59,14 +59,6 @@ public class ProjectController {
         return "write-project";
     }
 
-    @PostMapping("write-project")
-    public String updateProject(int id, Model model){
-
-        model.addAttribute("project", projectService.getProject(id));
-
-        return "write-project";
-    }
-
     @PostMapping("project/update")
     public String updateProject(ProjectVO projectVO, HttpSession httpSession){
 

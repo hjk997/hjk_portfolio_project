@@ -13,7 +13,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +27,13 @@ public class ProjectTest {
     void before() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyBatisConfig.class);
         projectService = applicationContext.getBean("projectService", ProjectService.class);
+
+        list = projectService.getProjectList(new Criteria());
+    }
+
+    @Test
+    public void 프로젝트_리스트_가져오기_확인(){
+        Assertions.assertFalse(list.isEmpty());
     }
 
     @Test
@@ -37,6 +43,7 @@ public class ProjectTest {
             ProjectVO projectVO = new ProjectVO(0, 0,1,"title"+i, "techStack","summary"+i, "part","review","link", 1, new Date(), new Date());
 
             int code = projectService.insertProjectTable(projectVO);
+            Assertions.assertTrue(code > 0);
         }
     }
 
@@ -47,15 +54,6 @@ public class ProjectTest {
         int code = projectService.insertProjectTable(projectVO);
 
         Assertions.assertTrue(code > 0);
-    }
-
-    @Test
-    public void 프로젝트_리스트_가져오기(){
-        list = projectService.getProjectList(new Criteria());
-
-        for(ProjectVO projectVO : list){
-            System.out.println(projectVO.toString());
-        }
     }
 
     @Test
@@ -71,6 +69,19 @@ public class ProjectTest {
     @Test
     public void 프로젝트_삭제(){
         int code = projectService.deleteProject(list.get(1).getUid());
+
+        Assertions.assertTrue(code > 0);
+    }
+
+    @Test
+    public void 프로젝트_게시글_수정(){
+        ProjectVO projectVO = list.get(2);
+
+        projectVO.setProjectType(2);
+        projectVO.setTitle("changed title");
+        projectVO.setReview("changed review");
+
+        int code = projectService.updateProjectTable(projectVO);
 
         Assertions.assertTrue(code > 0);
     }
