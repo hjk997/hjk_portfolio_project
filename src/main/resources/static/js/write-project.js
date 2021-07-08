@@ -12,33 +12,48 @@ if(gradeType){
 }
 
 function check_input() {
-//    var title = document.getElementById('title');
-//
-//    if (!title.value)
-//    // 제목을 작성하지 않았다면
-//    {
-//        show_modal("제목을 입력해주세요!");
-//        title.focus();
-//        // 화면 커서 이동
-//        return;
-//    }
-//    var contents = document.getElementById('contents');
-//
-//    if (!contents.value)
-//    {
-//        show_modal("내용을 입력해주세요!");
-//        // 화면 커서 이동
-//        contents.focus();
-//        return;
-//    }
-//
-//    // 체크박스 체크되었는지 확인하고 값 바꿔주기
-//    if(document.getElementById("note-checkbox").checked){
-//        document.getElementById("note").value = 1;
-//    }else{
-//        document.getElementById("note").value = 0;
-//    }
+    // 1. title
+    let title = document.getElementById('title');
 
+        if (!title.value)
+        // 제목을 작성하지 않았다면
+        {
+            show_modal("제목을 입력해주세요!");
+            title.focus();
+            // 화면 커서 이동
+            return;
+        }
+        
+        // 2. summary 
+    let summary = document.getElementById('summary');
+
+    if (!summary.value)
+    {
+        show_modal("내용을 입력해주세요!");
+        // 화면 커서 이동
+        summary.focus();
+        return;
+    }
+    
+    let startedDate = document.getElementById('startedDate');
+    
+        if (!startedDate.value)
+        {
+            show_modal("시작일을 입력해주세요!");
+            // 화면 커서 이동
+            startedDate.focus();
+            return;
+        }
+
+    let endedDate = document.getElementById('endedDate');
+
+    if (!endedDate.value)
+    {
+        show_modal("종료일을 입력해주세요!");
+        // 화면 커서 이동
+        endedDate.focus();
+        return;
+    }
 
     let radios = document.getElementsByName("grade");
     let gradeType = document.getElementById("gradeType");

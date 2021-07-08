@@ -169,9 +169,12 @@
 
 </section>
 
+<!-- modal -->
+<div th:replace="@{/modal}"></div>
 <!-- Footer-->
-<div th:replace="/footer"></div>
+<div th:replace="@{/footer}"></div>
 </body>
 <script th:inline="javascript" th:src="@{/js/write-project.js}"></script>
+<script th:inline="javascript" th:src="@{/js/modal.js}"></script>
 <script src="/js/common.js"></script>
 </html>
