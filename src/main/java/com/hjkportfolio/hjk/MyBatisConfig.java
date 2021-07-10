@@ -1,5 +1,6 @@
 package com.hjkportfolio.hjk;
 
+import com.hjkportfolio.hjk.image.ImageService;
 import com.hjkportfolio.hjk.project.ProjectService;
 import com.hjkportfolio.hjk.update.UpdateService;
 import com.hjkportfolio.hjk.user.LoginService;
@@ -61,6 +62,11 @@ public class MyBatisConfig {
     @Bean
     public ProjectService projectService() throws Exception {
         return new ProjectService(sqlSession());
+    }
+
+    @Bean
+    public ImageService imageService() throws Exception {
+        return new ImageService();
     }
 
 }

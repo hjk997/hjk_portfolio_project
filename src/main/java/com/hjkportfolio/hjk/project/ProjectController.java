@@ -1,5 +1,6 @@
 package com.hjkportfolio.hjk.project;
 
+import com.hjkportfolio.hjk.image.ImageService;
 import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.post.PageMaker;
 import com.hjkportfolio.hjk.post.ProjectVO;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -18,6 +21,9 @@ public class ProjectController {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    ImageService imageService;
 
     @GetMapping("project")
     public String project(int id, Model model){
@@ -60,11 +66,14 @@ public class ProjectController {
     }
 
     @PostMapping("project/update")
-    public String updateProject(ProjectVO projectVO, HttpSession httpSession){
+    public String updateProject(ProjectVO projectVO, @RequestParam("file")MultipartFile multipartFile, HttpSession httpSession){
 
         if(projectVO.getUid() == 0){
             // 삽입
             projectService.insertProjectTable(projectVO);
+            // return 받은 uid 값으로 image 삽입
+            imageService.setImageVO(multipartFile, projectVO.getUid());
+
         }else{
             // 수정
             projectService.updateProjectTable(projectVO);

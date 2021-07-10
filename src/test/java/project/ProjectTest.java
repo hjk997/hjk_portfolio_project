@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Rollback(true)
@@ -53,7 +54,7 @@ public class ProjectTest {
 
         int code = projectService.insertProjectTable(projectVO);
 
-        Assertions.assertTrue(code > 0);
+        Assertions.assertTrue(code > 0 && projectVO.getUid() != 0);
     }
 
     @Test
@@ -85,5 +86,4 @@ public class ProjectTest {
 
         Assertions.assertTrue(code > 0);
     }
-
 }

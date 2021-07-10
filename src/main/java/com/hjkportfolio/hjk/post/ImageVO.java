@@ -10,11 +10,10 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 public class ImageVO {
-    int uid;
-    int project_uid;
-    String uuid;
+    String ImageName;
     String imageRealName;
+    int projectUid;
     int imageSize;
-    Date updateDate;
-
+    Date writeDate;
+    String path;
 }

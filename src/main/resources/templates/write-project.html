@@ -39,7 +39,7 @@
       </div>
     </div>
 
-      <form action="project/update" id="project_write_form" method="POST">
+      <form action="project/update" id="project_write_form" method="post" enctype="multipart/form-data">
         <input type="hidden" id="uid" name="uid" th:value="${project != null ? project?.uid : 0}"/>
         <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}"/>
         <input type="hidden" id="projectType" name="projectType" th:value="${project?.projectType}"/>
@@ -134,8 +134,8 @@
             <img src="assets/img/no-image.png" alt="" style="width:50%; height:auto;"/>
           </div>
           <div class="col-sm-3 border" >
-            <label for="exampleFormControlFile1">이미지 첨부하기</label>
-            <input type="file" class="form-control-file " id="exampleFormControlFile1">
+            <label for="file">이미지 첨부하기</label>
+            <input type="file" class="form-control-file " id="file" name="file">
           </div>
           <div class="col border overflow-auto" style="max-height: 100px;">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
