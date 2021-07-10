@@ -96,27 +96,16 @@
                   <div class="divider-custom-line"></div>
                 </div>
                 <!-- About Section Content-->
-                <div class="text-black col-lg d-flex flex-column" style="justify-content: center;
+                <div class="text-black col-lg " style="justify-content: center;
                 align-items: center;"><p>
-                    <ui>
-                      <li>
-                        에 대해 자세히 알려주는 포트폴리오! <br />
-                      </li>
-                      <li>
-                        프로젝트 작성/수정을 간단하게! 게시판 기능 구현 <br />
-                      </li>
-                      <li>
-                        bootstrap을 사용해서 구현된 예쁜 웹 페이지 <br />
-                      </li>
-                      <li>
-                        영어/ 한국어 동시 지원<br />
-                      </li>
-                    </ui>
+                    <ul th:each="post: ${updateList}" class="list-group">
+                      <a th:href="@{/update(id=${post.uid})}"><li class="list-group-item" th:text="${post.title}"></li></a>
+                    </ul>
                     </p>
                 </div>
                 <!-- 자세히 보기  -->
                 <div class="divider-custom">
-                  <div class="divider-custom-icon"><a href="update-list.html"><i class="fa fa-arrow-circle-right" aria-hidden="true" style=""></i> 자세히 보기</a></div>
+                  <div class="divider-custom-icon"><a href="update-list"><i class="fa fa-arrow-circle-right" aria-hidden="true" style=""></i> 자세히 보기</a></div>
                 </div>
             </div>
         </section>
