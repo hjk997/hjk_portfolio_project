@@ -32,7 +32,6 @@ public class ImageService {
             String absolutePath = new File("").getAbsolutePath() + "\\";
 
             // 경로를 지정하고 그곳에다가 저장할 심산이다
-            // TODO: 절대경로 대신 임의로 지정한 경로에 추가하는걸로 바꾸기
             String path = "images/" + current_date;
             System.out.println("path : " + absolutePath + path);
             File file = new File(path);
