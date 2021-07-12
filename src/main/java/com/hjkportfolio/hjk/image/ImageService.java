@@ -32,7 +32,6 @@ public class ImageService {
             String absolutePath = new File("").getAbsolutePath() + "\\";
 
             // 경로를 지정하고 그곳에다가 저장할 심산이다
-            // TODO: 절대경로 대신 임의로 지정한 경로에 추가하는걸로 바꾸기
             String path = "images/" + current_date;
             System.out.println("path : " + absolutePath + path);
             File file = new File(path);
@@ -44,7 +43,9 @@ public class ImageService {
 
             // 3. 파일 첨부
             String contentType = multipartFile.getContentType();
-            String originalFileExtension = multipartFile.getOriginalFilename();
+            String originalFileExtension;
+            String fileName = multipartFile.getOriginalFilename();
+            fileName = fileName.substring(0, fileName.length() - 4);
             // 확장자 명이 없으면 이 파일은 잘 못 된 것이다
             if (ObjectUtils.isEmpty(contentType)) {
                 return 0;
@@ -60,7 +61,7 @@ public class ImageService {
                 return 0;
             }
 
-            String new_file_name = originalFileExtension + Long.toString(System.nanoTime()) + originalFileExtension;
+            String new_file_name = fileName + Long.toString(System.nanoTime()) + originalFileExtension;
 
             ImageVO imageVO = new ImageVO(new_file_name, multipartFile.getOriginalFilename(), uid, (int) multipartFile.getSize(), new Date(), path);
 

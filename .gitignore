@@ -213,4 +213,7 @@ database.properties
 ### Gradle Patch ###
 **/build/
 
+### ETC
+images/
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,java-web,gradle,git,intellij
