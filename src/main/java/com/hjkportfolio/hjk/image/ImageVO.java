@@ -1,4 +1,4 @@
-package com.hjkportfolio.hjk.post;
+package com.hjkportfolio.hjk.image;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

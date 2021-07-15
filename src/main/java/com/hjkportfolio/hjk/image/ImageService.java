@@ -1,7 +1,6 @@
 package com.hjkportfolio.hjk.image;
 
 import com.hjkportfolio.hjk.mapper.ImageMapper;
-import com.hjkportfolio.hjk.post.ImageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,11 +9,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class ImageService {
 
     @Autowired
     ImageMapper imageMapper;
+
+    public List<ImageVO> getImageList(int id){
+        return imageMapper.getImageList(id);
+    }
 
     public int insertSingleImage(ImageVO imageVO){
         return imageMapper.insertSingleImage(imageVO);
@@ -32,8 +36,7 @@ public class ImageService {
             String absolutePath = new File("").getAbsolutePath() + "\\";
 
             // 경로를 지정하고 그곳에다가 저장할 심산이다
-            String path = "images/" + current_date;
-            System.out.println("path : " + absolutePath + path);
+            String path = "images\\" + current_date;
             File file = new File(path);
             // 저장할 위치의 디렉토리가 존지하지 않을 경우
             if (!file.exists()) {
@@ -63,12 +66,12 @@ public class ImageService {
 
             String new_file_name = fileName + Long.toString(System.nanoTime()) + originalFileExtension;
 
-            ImageVO imageVO = new ImageVO(new_file_name, multipartFile.getOriginalFilename(), uid, (int) multipartFile.getSize(), new Date(), path);
+            ImageVO imageVO = new ImageVO(new_file_name, multipartFile.getOriginalFilename(), uid, (int) multipartFile.getSize(), new Date(), "images?path=" + current_date + "&name=" + new_file_name);
 
             int code = insertSingleImage(imageVO);
 
             // 저장된 파일로 변경하여 이를 보여주기 위함
-            file = new File(absolutePath + path + "/" + new_file_name);
+            file = new File(absolutePath + path + "\\" + new_file_name);
             multipartFile.transferTo(file);
 
             // 4. return
@@ -78,6 +81,10 @@ public class ImageService {
 
             return 0;
         }
+    }
+
+    public void getImage(){
+
     }
 
 }

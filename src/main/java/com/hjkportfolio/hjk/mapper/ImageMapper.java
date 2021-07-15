@@ -1,6 +1,6 @@
 package com.hjkportfolio.hjk.mapper;
 
-import com.hjkportfolio.hjk.post.ImageVO;
+import com.hjkportfolio.hjk.image.ImageVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

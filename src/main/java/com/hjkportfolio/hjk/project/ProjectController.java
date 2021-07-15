@@ -1,6 +1,7 @@
 package com.hjkportfolio.hjk.project;
 
 import com.hjkportfolio.hjk.image.ImageService;
+import com.hjkportfolio.hjk.image.ImageVO;
 import com.hjkportfolio.hjk.post.Criteria;
 import com.hjkportfolio.hjk.post.PageMaker;
 import com.hjkportfolio.hjk.post.ProjectVO;
@@ -28,9 +29,15 @@ public class ProjectController {
     @GetMapping("project")
     public String project(int id, Model model){
 
+        // 1. 프로젝트 게시글 가져오기
         ProjectVO projectVO = projectService.getProject(id);
-
         model.addAttribute("project", projectVO);
+
+        // 2. 게시글에 물려있는 이미지 가져오기
+        List<ImageVO> imageVOList = imageService.getImageList(id);
+
+        // 3. 가져온 이미지를 파일 형태로 리스트에 저장하기
+        model.addAttribute("imageList", imageVOList);
 
         return "project";
     }
