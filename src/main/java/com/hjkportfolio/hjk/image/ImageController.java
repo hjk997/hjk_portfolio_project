@@ -3,6 +3,7 @@ package com.hjkportfolio.hjk.image;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -14,9 +15,7 @@ import java.io.OutputStream;
 public class ImageController {
 
     @GetMapping("images")
-    public void image(String path, String name, HttpServletResponse response) throws IOException {
-
-        // stream 처리
+    public @ResponseBody void image(String path, String name, HttpServletResponse response) throws IOException {
         // 1. 경로 설정
         StringBuilder sb = new StringBuilder();
         String filePath = sb.append(new File("").getAbsolutePath()).append("\\").
@@ -28,6 +27,5 @@ public class ImageController {
         FileCopyUtils.copy(fileInputStream, outputStream);
 
         outputStream.flush();
-
     }
 }

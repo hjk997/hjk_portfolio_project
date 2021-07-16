@@ -73,13 +73,15 @@ public class ProjectController {
     }
 
     @PostMapping("project/update")
-    public String updateProject(ProjectVO projectVO, @RequestParam("file")MultipartFile multipartFile, HttpSession httpSession){
+    public String updateProject(ProjectVO projectVO, @RequestParam("file")List<MultipartFile> multipartFiles, HttpSession httpSession){
 
         if(projectVO.getUid() == 0){
             // 삽입
             projectService.insertProjectTable(projectVO);
             // return 받은 uid 값으로 image 삽입
-            imageService.setImageVO(multipartFile, projectVO.getUid());
+            for(MultipartFile multipartFile : multipartFiles){
+                imageService.setImageVO(multipartFile, projectVO.getUid());
+            }
 
         }else{
             // 수정
