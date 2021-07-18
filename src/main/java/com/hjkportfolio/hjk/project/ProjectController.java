@@ -80,6 +80,8 @@ public class ProjectController {
             projectService.insertProjectTable(projectVO);
             // return 받은 uid 값으로 image 삽입
             for(MultipartFile multipartFile : multipartFiles){
+                if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
+                    continue;
                 imageService.setImageVO(multipartFile, projectVO.getUid());
             }
 

@@ -3,6 +3,7 @@
 <head>
   <title>프로젝트 글 작성</title>
 <th:block th:replace="/header"></th:block>
+  <meta>
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -39,7 +40,7 @@
       </div>
     </div>
 
-      <form action="project/update" id="project_write_form" method="post" enctype="multipart/form-data">
+      <form  id="project_write_form" method="post" enctype="multipart/form-data">
         <input type="hidden" id="uid" name="uid" th:value="${project != null ? project?.uid : 0}"/>
         <input type="hidden" id="writerUid" name="writerUid" th:value="${session.uid}"/>
         <input type="hidden" id="projectType" name="projectType" th:value="${project?.projectType}"/>

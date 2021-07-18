@@ -83,8 +83,4 @@ public class ImageService {
         }
     }
 
-    public void getImage(){
-
-    }
-
 }

@@ -133,6 +133,27 @@ function check_input() {
         projectType.value = 0;
     }
 
-    document.getElementById("project_write_form").submit();
+//    document.getElementById("project_write_form").submit();
     // 모두 확인 후 submit()
+
+
+//    var token = $("meta[name='_csrf']").attr("content");
+//    var header = $("meta[name='_csrf_header']").attr("content");
+
+    var data = new FormData($("#project_write_form")[0]);
+
+    $.ajax({
+//        beforeSend: function(xhr){
+//            xhr.setRequestHeader(header, token);
+//        },
+        url: "project/update",
+        data: data,
+        processData: false,
+        contentType: false,
+        enctype:'multipart/form-data',
+        type:"POST",
+        }).done(function (fragment){
+            alert("게시글 작성 성공");
+        });
+
  }
