@@ -153,7 +153,7 @@ function check_input() {
         enctype:'multipart/form-data',
         type:"POST",
         }).done(function (fragment){
-            alert("게시글 작성 성공");
+            window.location = "project-list";
         });
 
  }

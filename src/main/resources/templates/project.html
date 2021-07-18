@@ -83,7 +83,7 @@
       </div>
 
       <!-- carousel 캐로셀 -->
-      <div id="carouselExampleControls" class="carousel slide my-5" data-ride="carousel">
+      <div id="carousel" class="carousel slide my-5" data-ride="carousel">
         <div class="carousel-inner">
           <div th:each="image : ${imageList}" th:class="${imageStat.count == 1 ? 'carousel-item active' : 'carousel-item'}">
             <img th:src="@{${image.path}}" class="d-block w-100" th:alt="${image.imageRealName}">
