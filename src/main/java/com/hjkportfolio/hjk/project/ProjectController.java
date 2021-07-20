@@ -7,10 +7,9 @@ import com.hjkportfolio.hjk.post.PageMaker;
 import com.hjkportfolio.hjk.post.ProjectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -73,13 +72,15 @@ public class ProjectController {
     }
 
     @PostMapping("project/update")
-    public String updateProject(ProjectVO projectVO, @RequestParam("file")List<MultipartFile> multipartFiles, HttpSession httpSession){
+    @ResponseBody
+    @Transactional
+    public String updateProject(@RequestBody List<MultipartFile> imageFiles, ProjectVO projectVO){
 
         if(projectVO.getUid() == 0){
             // 삽입
             projectService.insertProjectTable(projectVO);
             // return 받은 uid 값으로 image 삽입
-            for(MultipartFile multipartFile : multipartFiles){
+            for(MultipartFile multipartFile : imageFiles){
                 if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
                     continue;
                 imageService.setImageVO(multipartFile, projectVO.getUid());
@@ -88,6 +89,11 @@ public class ProjectController {
         }else{
             // 수정
             projectService.updateProjectTable(projectVO);
+            for(MultipartFile multipartFile : imageFiles){
+                if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
+                    continue;
+                imageService.setImageVO(multipartFile, projectVO.getUid());
+            }
         }
 
         return "redirect:/project-list";

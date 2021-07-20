@@ -33,31 +33,39 @@ $(document).ready(
             for (var fileIndex = 0 ; fileIndex < input[0].files.length ; fileIndex++) {
                 var file = input[0].files[fileIndex];
                 var reader = new FileReader();
+                console.log("create reader");
 
-                reader.onload = function (img) {
-                    var imgNum = previewIndex++;
+                let imgNum = previewIndex++;
 
-                    // div id="preview" 내에 동적코드추가.
-                    // 이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
-                    var span = document.createElement('span');
-                    span.id = "img_id_" + imgNum;
-                    span.style.width = '100px';
-                    span.style.height = '100px';
-                    preview.appendChild(span);
+                console.log("onload" + imgNum);
+                // div id="preview" 내에 동적코드추가.
+                // 이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
+                let span = document.createElement('span');
+                span.id = "img_id_" + imgNum;
+                span.style.width = '100px';
+                span.style.height = '100px';
+                preview.appendChild(span);
 
-                    var image = document.createElement("img");
-                    image.src = img.target.result
-                    image.style.width='inherit';
-                    image.style.height='inherit';
-                    image.style.cursor='pointer';
+                let image = document.createElement("img");
+                //image.src = img.target.result;
+                image.style.width='inherit';
+                image.style.height='inherit';
+                image.style.cursor='pointer';
+                image.setAttribute('onclick', 'deleteImage('+imgNum+')');
 
-                    image.onclick = () => deleteImage(imgNum);
-                    span.appendChild(image);
+                //image.onclick = () => deleteImage(imgNum);
+                span.appendChild(image);
 
-                    files[imgNum] = file;
-                };
+                files[imgNum] = file;
+
+                reader.onloadend = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                })(image);
 
                 reader.readAsDataURL(file);
+                console.log("finish?");
             }
         } else alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
     }
@@ -133,25 +141,34 @@ function check_input() {
         projectType.value = 0;
     }
 
-//    document.getElementById("project_write_form").submit();
-    // 모두 확인 후 submit()
-
-
 //    var token = $("meta[name='_csrf']").attr("content");
 //    var header = $("meta[name='_csrf_header']").attr("content");
 
     var data = new FormData($("#project_write_form")[0]);
 
+
+//    for (var index = 0; index < Object.keys(files).length; index++) {
+//                        //formData 공간에 files라는 이름으로 파일을 추가한다.
+//                        //동일명으로 계속 추가할 수 있다.
+//                        data.append('imageFiles',files[index]);
+//                    }
+
+    // files.forEach(index => data.append('imageFiles',files[index]));
+
+    for(const[key] of Object.entries(files)){
+        data.append('imageFiles',files[key]);
+    }
+
     $.ajax({
-//        beforeSend: function(xhr){
-//            xhr.setRequestHeader(header, token);
-//        },
         url: "project/update",
         data: data,
         processData: false,
         contentType: false,
         enctype:'multipart/form-data',
         type:"POST",
+        error:function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
         }).done(function (fragment){
             window.location = "project-list";
         });
