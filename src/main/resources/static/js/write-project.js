@@ -4,8 +4,8 @@ $(document).ready(
         // 태그에 onchange를 부여한다.
         $('#file').change(function() {
                 addPreview($(this)); //preview form 추가하기
+                $("#file").val("");
         });
-
 
         var projectType = document.getElementById("projectType").value;
         var gradeType = document.getElementById("gradeType").value;
@@ -32,6 +32,18 @@ $(document).ready(
             //파일 선택이 여러개였을 시의 대응
             for (var fileIndex = 0 ; fileIndex < input[0].files.length ; fileIndex++) {
                 var file = input[0].files[fileIndex];
+
+                var file_kind = file.name.lastIndexOf('.');
+                var file_name = file.name.substring(file_kind+1, file.name.length);
+                var file_type = file_name.toLowerCase();
+
+	            var check_file_type=new Array();
+
+	            check_file_type=['jpg','gif','png'];
+                if(check_file_type.indexOf(file_type)==-1) {
+                    continue;
+                }
+
                 var reader = new FileReader();
                 console.log("create reader");
 
@@ -68,6 +80,7 @@ $(document).ready(
                 console.log("finish?");
             }
         } else alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+
     }
 
 
@@ -141,19 +154,7 @@ function check_input() {
         projectType.value = 0;
     }
 
-//    var token = $("meta[name='_csrf']").attr("content");
-//    var header = $("meta[name='_csrf_header']").attr("content");
-
     var data = new FormData($("#project_write_form")[0]);
-
-
-//    for (var index = 0; index < Object.keys(files).length; index++) {
-//                        //formData 공간에 files라는 이름으로 파일을 추가한다.
-//                        //동일명으로 계속 추가할 수 있다.
-//                        data.append('imageFiles',files[index]);
-//                    }
-
-    // files.forEach(index => data.append('imageFiles',files[index]));
 
     for(const[key] of Object.entries(files)){
         data.append('imageFiles',files[key]);
@@ -165,10 +166,7 @@ function check_input() {
         processData: false,
         contentType: false,
         enctype:'multipart/form-data',
-        type:"POST",
-        error:function(request,status,error){
-            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
+        type:"POST"
         }).done(function (fragment){
             window.location = "project-list";
         });
