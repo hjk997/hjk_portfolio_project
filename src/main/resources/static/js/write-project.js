@@ -31,6 +31,9 @@ $(document).ready(
         if (input[0].files) {
             //파일 선택이 여러개였을 시의 대응
             for (var fileIndex = 0 ; fileIndex < input[0].files.length ; fileIndex++) {
+            if(Object.keys(files).length > 19){
+                break;
+            }
                 var file = input[0].files[fileIndex];
 
                 var file_kind = file.name.lastIndexOf('.');
@@ -45,11 +48,9 @@ $(document).ready(
                 }
 
                 var reader = new FileReader();
-                console.log("create reader");
 
                 let imgNum = previewIndex++;
 
-                console.log("onload" + imgNum);
                 // div id="preview" 내에 동적코드추가.
                 // 이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
                 let span = document.createElement('span');
@@ -77,10 +78,10 @@ $(document).ready(
                 })(image);
 
                 reader.readAsDataURL(file);
-                console.log("finish?");
             }
         } else alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
 
+    checkNumOfFiles();
     }
 
 
@@ -88,8 +89,18 @@ function deleteImage(idx){
     delete files[idx];
     $('#img_id_' + idx).remove();
 
-console.log("delete");
+    checkNumOfFiles();
+}
 
+function checkNumOfFiles(){
+    // 첨부 파일 개수가 20개를 넘으면 파일 버튼을 활성화하지 못하게 한다.
+    if(Object.keys(files).length > 19){
+        $("#file_label").text("더 이상 파일을 첨부할 수 없습니다.");
+        $("#file").attr("disabled", true).attr("readonly", true);
+    }else{
+        $("#file_label").text("이미지 첨부하기");
+        $("#file").attr("disabled", false).attr("readonly", false);
+    }
 }
 
 function check_input() {
