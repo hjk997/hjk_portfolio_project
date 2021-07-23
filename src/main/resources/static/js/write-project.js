@@ -31,9 +31,10 @@ $(document).ready(
         if (input[0].files) {
             //파일 선택이 여러개였을 시의 대응
             for (var fileIndex = 0 ; fileIndex < input[0].files.length ; fileIndex++) {
-            if(Object.keys(files).length > 19){
-                break;
-            }
+                if(Object.keys(files).length > 19){
+                    break;
+                }
+
                 var file = input[0].files[fileIndex];
 
                 var file_kind = file.name.lastIndexOf('.');
@@ -79,7 +80,7 @@ $(document).ready(
 
                 reader.readAsDataURL(file);
             }
-        } else alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+        } else alert('파일 업로드를 실패했습니다. 다시 시도해주세요.'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
 
     checkNumOfFiles();
     }

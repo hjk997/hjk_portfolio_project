@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -17,14 +18,18 @@ public class ImageService {
     ImageMapper imageMapper;
 
     public List<ImageVO> getImageList(int id){
-        return imageMapper.getImageList(id);
+
+        List<ImageVO> imageList = imageMapper.getImageList(id);
+        Collections.sort(imageList);
+
+        return imageList;
     }
 
     public int insertSingleImage(ImageVO imageVO){
         return imageMapper.insertSingleImage(imageVO);
     }
 
-    public int setImageVO(MultipartFile multipartFile, int uid) {
+    public int setImageVO(MultipartFile multipartFile, int uid, int order) {
         try{
             // 1. 파일 이름 설정
             // 파일 이름을 업로드 한 날짜로 바꾸어서 저장할 것이다
@@ -66,7 +71,7 @@ public class ImageService {
 
             String new_file_name = fileName + Long.toString(System.nanoTime()) + originalFileExtension;
 
-            ImageVO imageVO = new ImageVO(new_file_name, multipartFile.getOriginalFilename(), uid, (int) multipartFile.getSize(), new Date(), "images?path=" + current_date + "&name=" + new_file_name);
+            ImageVO imageVO = new ImageVO(new_file_name, multipartFile.getOriginalFilename(), uid, (int) multipartFile.getSize(), new Date(), "images?path=" + current_date + "&name=" + new_file_name, order);
 
             int code = insertSingleImage(imageVO);
 

@@ -79,20 +79,22 @@ public class ProjectController {
         if(projectVO.getUid() == 0){
             // 삽입
             projectService.insertProjectTable(projectVO);
+            int order = 1;
             // return 받은 uid 값으로 image 삽입
             for(MultipartFile multipartFile : imageFiles){
                 if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
                     continue;
-                imageService.setImageVO(multipartFile, projectVO.getUid());
+                imageService.setImageVO(multipartFile, projectVO.getUid(), order++);
             }
 
         }else{
             // 수정
             projectService.updateProjectTable(projectVO);
+            int order = 1;
             for(MultipartFile multipartFile : imageFiles){
                 if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
                     continue;
-                imageService.setImageVO(multipartFile, projectVO.getUid());
+                imageService.setImageVO(multipartFile, projectVO.getUid(), order++);
             }
         }
 
