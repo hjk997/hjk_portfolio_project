@@ -139,7 +139,9 @@
             <input type="file" style="display: none" class="form-control-file" id="file" name="file" accept=".gif, .jpg, .png" multiple>
           </div>
           <div id="preview" class="col border overflow-auto" style="max-height: 200px;">
-
+            <span th:each="image : ${imageList}" th:id="${'img_id_' + imageStat.index}" style="width: 100px; height: 100px;">
+              <img th:onclick="'deleteImage(' + ${imageStat.index} + ')'" th:src="@{${image.path}}" style="width: inherit; height: inherit; cursor: pointer;">
+            </span>
           </div>
         </div>
         </div>

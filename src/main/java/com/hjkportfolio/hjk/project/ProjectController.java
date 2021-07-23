@@ -66,6 +66,7 @@ public class ProjectController {
     public String writeProject(Optional<Integer> id, Model model){
         if(id.isPresent()){
             model.addAttribute("project", projectService.getProject(id.get()));
+            model.addAttribute("imageList", imageService.getImageList(id.get()));
         }
 
         return "write-project";
@@ -79,7 +80,7 @@ public class ProjectController {
         if(projectVO.getUid() == 0){
             // 삽입
             projectService.insertProjectTable(projectVO);
-            int order = 1;
+            int order = 0;
             // return 받은 uid 값으로 image 삽입
             for(MultipartFile multipartFile : imageFiles){
                 if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
@@ -90,7 +91,7 @@ public class ProjectController {
         }else{
             // 수정
             projectService.updateProjectTable(projectVO);
-            int order = 1;
+            int order = 0;
             for(MultipartFile multipartFile : imageFiles){
                 if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
                     continue;
