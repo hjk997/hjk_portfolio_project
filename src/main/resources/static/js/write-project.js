@@ -23,7 +23,17 @@ $(document).ready(
 
     var preview = document.getElementById('preview');
     var files = {};
+    var preFiles = [];
     var previewIndex = 0;
+
+    window.onload = function(){
+            // pre_img_id 정보 저장
+            let preImgId = document.getElementsByName('pre_img');
+
+            for(let i = 0 ; i < preImgId.length ; i++){
+                preFiles[i] = preImgId[i].getAttribute('id');
+            }
+        };
 
     // image preview 기능 구현
     // input = file object[]
@@ -31,7 +41,7 @@ $(document).ready(
         if (input[0].files) {
             //파일 선택이 여러개였을 시의 대응
             for (var fileIndex = 0 ; fileIndex < input[0].files.length ; fileIndex++) {
-                if(Object.keys(files).length > 19){
+                if(Object.keys(files).length + preFiles.length > 19){
                     break;
                 }
 
@@ -87,15 +97,27 @@ $(document).ready(
 
 
 function deleteImage(idx){
-    delete files[idx];
-    $('#img_id_' + idx).remove();
+        delete files[idx];
+        $('#img_id_' + idx).remove();
+        checkNumOfFiles();
+}
 
-    checkNumOfFiles();
+function preImageDelete(idx, name){
+        // 몇 번째 자식인지 찾아서 지우기
+        for(let i = 0 ; i < preFiles.length ; i++){
+            if(preFiles[i] == name){
+                preFiles.splice(i, 1);
+                $('#pre_img_id_' + idx).remove();
+                break;
+            }
+        }
+
+        checkNumOfFiles();
 }
 
 function checkNumOfFiles(){
     // 첨부 파일 개수가 20개를 넘으면 파일 버튼을 활성화하지 못하게 한다.
-    if(Object.keys(files).length > 19){
+    if(Object.keys(files).length + preFiles.length > 19){
         $("#file_label").text("더 이상 파일을 첨부할 수 없습니다.");
         $("#file").attr("disabled", true).attr("readonly", true);
     }else{
@@ -170,6 +192,10 @@ function check_input() {
 
     for(const[key] of Object.entries(files)){
         data.append('imageFiles',files[key]);
+    }
+
+    for(let i = 0 ; i < preFiles.length ; i++){
+        data.append('preImageFiles', preFiles[i]);
     }
 
     $.ajax({

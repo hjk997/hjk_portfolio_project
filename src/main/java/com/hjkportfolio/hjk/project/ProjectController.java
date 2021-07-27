@@ -75,27 +75,37 @@ public class ProjectController {
     @PostMapping("project/update")
     @ResponseBody
     @Transactional
-    public String updateProject(@RequestBody List<MultipartFile> imageFiles, ProjectVO projectVO){
+    public String updateProject(@RequestBody List<MultipartFile> imageFiles, ProjectVO projectVO, String[] preImageFiles){
+
+        if(preImageFiles != null){
+            for(String s : preImageFiles){
+                System.out.println(s);
+            }
+        }
 
         if(projectVO.getUid() == 0){
             // 삽입
             projectService.insertProjectTable(projectVO);
             int order = 0;
             // return 받은 uid 값으로 image 삽입
-            for(MultipartFile multipartFile : imageFiles){
-                if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
-                    continue;
-                imageService.setImageVO(multipartFile, projectVO.getUid(), order++);
+            if(imageFiles != null) {
+                for (MultipartFile multipartFile : imageFiles) {
+                    if (multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
+                        continue;
+                    imageService.setImageVO(multipartFile, projectVO.getUid(), order++);
+                }
             }
 
         }else{
             // 수정
             projectService.updateProjectTable(projectVO);
             int order = 0;
-            for(MultipartFile multipartFile : imageFiles){
-                if(multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
-                    continue;
-                imageService.setImageVO(multipartFile, projectVO.getUid(), order++);
+            if(imageFiles != null) {
+                for (MultipartFile multipartFile : imageFiles) {
+                    if (multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
+                        continue;
+                    imageService.setImageVO(multipartFile, projectVO.getUid(), order++);
+                }
             }
         }
 
