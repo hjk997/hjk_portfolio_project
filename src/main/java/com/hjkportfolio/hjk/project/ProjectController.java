@@ -120,7 +120,9 @@ public class ProjectController {
                     }
 
                     if(isExist){
-                        // 3. 이미지 삭제
+                        // 3. 서버 폴더에서 이미지 삭제
+                        imageService.deleteImageInServerFolder(list.get(i));
+                        // 4. DB에서 이미지 삭제
                         imageService.deleteImageWithName(name);
                     }
                 }
@@ -141,6 +143,7 @@ public class ProjectController {
     @GetMapping("project/delete")
     public String deleteProject(int id, HttpSession httpSession){
 
+        imageService.deleteAllImageInServer(id);
         projectService.deleteProject(id);
 
         return "redirect:/project-list";

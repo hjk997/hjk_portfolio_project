@@ -19,6 +19,8 @@ public class ImageService {
     @Autowired
     ImageMapper imageMapper;
 
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+
     public List<ImageVO> getImageList(int id){
 
         List<ImageVO> imageList = imageMapper.getImageList(id);
@@ -96,5 +98,31 @@ public class ImageService {
 
     public int updateImageOrder(String name, int order) {
         return imageMapper.updateImageOrder(order, name);
+    }
+
+    public void deleteImageInServerFolder(ImageVO imageVO) {
+        StringBuilder sb = new StringBuilder();
+        String filePath = sb.append(new File("").getAbsolutePath()).append("\\").
+                append("images\\").append(simpleDateFormat.format(imageVO.getWriteDate())).append("\\").append(imageVO.getImageName()).toString();
+        System.out.println("filePath : " + filePath);
+        File file = new File(filePath);
+
+        if(file.exists()){
+            file.delete();
+        }else{
+            System.out.println("not found");
+        }
+    }
+
+    public void deleteAllImageInServer(int uid){
+        // 1. 서버에서 삭제
+        List<ImageVO> imageVOList = imageMapper.getImageList(uid);
+
+        for(ImageVO imageVO : imageVOList){
+            deleteImageInServerFolder(imageVO);
+        }
+
+        // 2. DB에서 삭제
+        imageMapper.deleteImageWithUid(uid);
     }
 }
