@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,10 +84,11 @@ public class ProjectController {
             }
         }
 
+        int order = 1;
+
         if(projectVO.getUid() == 0){
             // 삽입
             projectService.insertProjectTable(projectVO);
-            int order = 0;
             // return 받은 uid 값으로 image 삽입
             if(imageFiles != null) {
                 for (MultipartFile multipartFile : imageFiles) {
@@ -99,7 +101,31 @@ public class ProjectController {
         }else{
             // 수정
             projectService.updateProjectTable(projectVO);
-            int order = 0;
+            if(preImageFiles != null){
+                // 1. 기존에 저장된 이미지 리스트 가져오기
+                List<ImageVO> list = imageService.getImageList(projectVO.getUid());
+                Collections.sort(list);
+
+                for(int i = 0 ; i < list.size() ; i++){
+                    boolean isExist = true;
+                    String name = list.get(i).getImageName();
+
+                    for(int j = 0 ; j < preImageFiles.length ; j++) {
+                        if (name.equals(preImageFiles[j])) {
+                            // 2. 우선 순위 변경
+                            imageService.updateImageOrder(name, order++);
+                            isExist = false;
+                            break;
+                        }
+                    }
+
+                    if(isExist){
+                        // 3. 이미지 삭제
+                        imageService.deleteImageWithName(name);
+                    }
+                }
+            }
+
             if(imageFiles != null) {
                 for (MultipartFile multipartFile : imageFiles) {
                     if (multipartFile.getName().isEmpty() || multipartFile.getName().isBlank())
