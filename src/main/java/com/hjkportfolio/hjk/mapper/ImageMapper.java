@@ -25,4 +25,7 @@ public interface ImageMapper {
 
     @Select("SELECT * FROM image WHERE image_name=#{name};")
     public ImageVO getImageWithName(@Param("name") String name);
+
+    @Select("SELECT * FROM image WHERE project_uid=#{uid} AND image_order=1")
+    public ImageVO getThumbnailImage(@Param("uid") int uid);
 }

@@ -104,7 +104,7 @@ public class ImageService {
         StringBuilder sb = new StringBuilder();
         String filePath = sb.append(new File("").getAbsolutePath()).append("\\").
                 append("images\\").append(simpleDateFormat.format(imageVO.getWriteDate())).append("\\").append(imageVO.getImageName()).toString();
-        System.out.println("filePath : " + filePath);
+
         File file = new File(filePath);
 
         if(file.exists()){
@@ -124,5 +124,9 @@ public class ImageService {
 
         // 2. DB에서 삭제
         imageMapper.deleteImageWithUid(uid);
+    }
+
+    public ImageVO getThumbnailImage(int uid){
+        return imageMapper.getThumbnailImage(uid);
     }
 }

@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -77,13 +79,6 @@ public class ProjectController {
     @ResponseBody
     @Transactional
     public String updateProject(@RequestBody List<MultipartFile> imageFiles, ProjectVO projectVO, String[] preImageFiles){
-
-        if(preImageFiles != null){
-            for(String s : preImageFiles){
-                System.out.println(s);
-            }
-        }
-
         int order = 1;
 
         if(projectVO.getUid() == 0){
@@ -101,16 +96,18 @@ public class ProjectController {
         }else{
             // 수정
             projectService.updateProjectTable(projectVO);
-            if(preImageFiles != null){
-                // 1. 기존에 저장된 이미지 리스트 가져오기
-                List<ImageVO> list = imageService.getImageList(projectVO.getUid());
+
+            // 1. 기존에 저장된 이미지 리스트 가져오기
+            List<ImageVO> list = imageService.getImageList(projectVO.getUid());
+
+            if(preImageFiles != null) {
                 Collections.sort(list);
 
-                for(int i = 0 ; i < list.size() ; i++){
+                for (int i = 0; i < list.size(); i++) {
                     boolean isExist = true;
                     String name = list.get(i).getImageName();
 
-                    for(int j = 0 ; j < preImageFiles.length ; j++) {
+                    for (int j = 0; j < preImageFiles.length; j++) {
                         if (name.equals(preImageFiles[j])) {
                             // 2. 우선 순위 변경
                             imageService.updateImageOrder(name, order++);
@@ -119,13 +116,15 @@ public class ProjectController {
                         }
                     }
 
-                    if(isExist){
+                    if (isExist) {
                         // 3. 서버 폴더에서 이미지 삭제
                         imageService.deleteImageInServerFolder(list.get(i));
                         // 4. DB에서 이미지 삭제
                         imageService.deleteImageWithName(name);
                     }
                 }
+            } else if(!list.isEmpty()){
+                imageService.deleteAllImageInServer(projectVO.getUid());
             }
 
             if(imageFiles != null) {
@@ -141,7 +140,7 @@ public class ProjectController {
     }
 
     @GetMapping("project/delete")
-    public String deleteProject(int id, HttpSession httpSession){
+    public String deleteProject(int id){
 
         imageService.deleteAllImageInServer(id);
         projectService.deleteProject(id);

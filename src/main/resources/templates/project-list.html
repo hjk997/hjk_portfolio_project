@@ -70,7 +70,7 @@
           <div  th:each="post : ${projectList}" name="list1" class="row" >
 
             <div class="col-4 imageContainer" >
-              <img src="assets/img/no-image.png" alt="image" />
+              <img th:src="@{thumbnail/images(id=${post.uid})}" alt="image" style="width: 250px; height: 250px;"/>
             </div>
             <div class="col-8" >
               <div class="ext-row">

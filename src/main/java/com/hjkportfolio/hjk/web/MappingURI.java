@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MappingURI {
 
-
-
     @GetMapping("test")
     public String test(Model model){
         return "test";
